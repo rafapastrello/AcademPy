@@ -21,4 +21,5 @@ from AcademPy import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view),
+    path('horarios-materias/', views.horarios_materias_view),
 ]
