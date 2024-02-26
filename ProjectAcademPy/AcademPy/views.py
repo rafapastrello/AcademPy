@@ -5,4 +5,3 @@ def home_view(request):
 
 def horarios_materias_view(request):
     return render(request, 'horarios_materias.html')
-
