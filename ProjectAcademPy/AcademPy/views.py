@@ -24,7 +24,7 @@ def home_view(request):
     return render(request, 'home.html', {
         'username': request.user.username,
     })
-
+    
 def login_view(request):
     if request.method == 'GET':
         return render(request, 'login.html', {
@@ -39,16 +39,23 @@ def login_view(request):
             return HttpResponseRedirect('/minha-conta')
         else:
             return render(request, 'login.html', {
-                'incorrect_login': True,
-                'username': request.user.username
+                'incorrect_login': True
             })
     else:
         return HttpResponseBadRequest()
 
+def login_e_seguranca_view(request):
+    return render(request, 'login_e_seguranca.html', {
+        'username': request.user.username,
+        'email': request.user.email,
+    })
+
+@login_required(login_url='/login')
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/login')
 
+@login_required(login_url='/login')
 def minha_conta_view(request):
     return render(request, 'minha_conta.html', {
         'username': request.user.username,
