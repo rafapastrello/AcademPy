@@ -25,30 +25,23 @@
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-floating mb-3 text-dark">
-                            <input type="name" class="form-control" name="nome" placeholder="Nome" required>
-                            <label for="nome">Nome completo*</label>
-                        </div>
-                        
-                        <div class="form-row mb-3 text-dark">
-                            <div class="form-floating col-md-6 text-dark">
-                                <input type="date" class="form-control" name="dt_nascimento" placeholder="Data de Nascimento">
-                                <label for="dt_nascimento">Data de Nascimento*</label>
-                            </div>
+                            <input type="name" class="form-control" name="username" id="username" placeholder="Nome" required>
+                            <label for="username">Nome completo*</label>
                         </div>
 
                         <div class="form-floating mb-3 text-dark">
-                            <input type="email" class="form-control" name="email" placeholder="email">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="email">
                             <label for="email">Email*</label>
                         </div>
 
                         <div class="form-row mb-3 text-dark">
                             <div class="form-floating col-md-6 mb-3 text-dark">
-                                <input type="password" class="form-control" name="senha" placeholder="Senha" required>
-                                <label for="senha">Senha*</label>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Senha" required>
+                                <label for="password">Senha*</label>
                             </div>
                             <div class="form-floating col-md-6 mb-3 text-dark">
-                                <input type="password" class="form-control" name="confirma_senha" placeholder="Confirmar Senha" required>
-                                <label for="confirma_senha">Confirmar Senha*</label>
+                                <input type="password" class="form-control" name="confirma_password" placeholder="Confirmar Senha" required>
+                                <label for="confirma_password">Confirmar Senha*</label>
                             </div>
                         </div>
 
