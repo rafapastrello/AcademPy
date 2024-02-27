@@ -1,6 +1,5 @@
 from django.apps import AppConfig
 
-
-class AcadempyConfig(AppConfig):
+class HelloblogConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'AcademPy'
+    name = 'HelloBlog'

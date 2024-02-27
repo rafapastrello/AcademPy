@@ -6,7 +6,7 @@
     <!-- Meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AcademPy - {% block titulo %}{% endblock titulo %}</title>
+    <title>Hello, Blog! - {% block titulo %}{% endblock titulo %}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{% static "img/logos/HB-logo.png" %}" type="image/x-icon">
@@ -28,13 +28,21 @@
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
 </head>
 
+<div id="topo"></div>
+
 <body>
     <div class="conteudo">
+        <!-- Ante Cabeçalho-->
+        <div class="border-bottom border-secondary faixa">
+            <img src="{% static 'img/icones/bolinhas-MacOs-fundo-transparente.png' %}" alt="bolinhas" class="bolinhas">
+        </div>
+
         <!-- Cabeçalho -->
         <div id='topo' class="container-fluid mt-2">
             <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
                 <a class="navbar-brand" href="/">
-                    <img src="{% static 'img/icones/HB-icon.png' %}" alt="HB-icon" class="mr-2" width="50px">Academ<span class="text-warning">Py</span>
+                    <img src="{% static 'img/icones/HB-icon.png' %}" alt="HB-icon" class="mr-2" width="50px">
+                    Hello, Blog!
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,10 +66,10 @@
                             <a class="nav-link" href="/minha-conta">Minha Conta</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-outline-light me-2" href="/login">Login</a>
+                            <a class="nav-link" href="/login">Login</a>
                         </li>
                         <li class="nav-item mr-3">
-                            <a class="btn btn-warning" href="/cadastro">Cadastro</a>
+                            <a class="nav-link" href="/cadastro">Cadastro</a>
                         </li>
                         <li class="nav-item">
                             <button class="btn btn-light" id="theme-toggle">Tema Claro</button>
@@ -78,7 +86,7 @@
             <!-- Rodapé -->
             <footer class="text-white text-center py-2 mt-4">
                 <div class="container-fluid">
-                    <p>&copy; 2024 AcademPy. Todos os direitos reservados.</p>
+                    <p>&copy; 2024 Meu Blog. Todos os direitos reservados.</p>
                 </div>
             </footer>
 
