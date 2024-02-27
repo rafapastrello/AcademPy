@@ -1,12 +1,11 @@
 {% extends "base.html" %}
-{% load static %}
-
 {% block titulo %}Login{% endblock titulo %}
 
 {% block conteudo %}
+
 <!-- Botão de Voltar -->
 <div class="d-flex justify-content-center align-items-center">
-    <a href="/" class="btn btn-secondary">Voltar</a>
+    <a href="/" class="btn btn-secondary mt-3">Voltar</a>
 </div>
 
 <!-- Conteúdo da Página de Login -->
@@ -15,7 +14,7 @@
         <div class="col-md-6 offset-md-3">
             <div class="card">
                 <div class="card-body">
-                    <h2 class="card-title text-center">Fazer login em HelloBlog</h2>
+                    <h2 class="card-title text-center">Fazer login em Academ<span class="text-primary">Py</span></h2>
 
                     <!-- Formulário de Login -->
                     <form method="POST">
@@ -34,7 +33,7 @@
                             <p class="text-danger">Email ou senha incorreto(s)!</p>
                         {% endif %}
 
-                        <button type="submit" class="btn btn-login-neon btn-block">Login</button>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </form>
                 </div>
             </div>
