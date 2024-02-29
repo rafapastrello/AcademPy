@@ -21,10 +21,13 @@ from AcademPy import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index_view),
-    path('home/', views.home_view),
     path('cadastro/', views.cadastro_view),
+    path('entrar/', views.entrar_view),
+    path('home/', views.home_view),
     path('login/', views.login_view),
+    path('login-e-seguranca/', views.login_e_seguranca_view),
     path('logout/', views.logout_view),
     path('minha-conta/', views.minha_conta_view),
-    path('login-e-seguranca/', views.login_e_seguranca_view),
+    path('sobre/', views.sobre_view),
+    path('redes-sociais/', views.redes_sociais_view),
 ]

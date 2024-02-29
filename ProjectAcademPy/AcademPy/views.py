@@ -20,6 +20,9 @@ def cadastro_view(request):
     else:
         return HttpResponseBadRequest()
 
+def entrar_view(request):
+    return render(request, 'entrar.html')
+
 def home_view(request):
     return render(request, 'home.html', {
         'username': request.user.username,
@@ -63,3 +66,9 @@ def minha_conta_view(request):
     return render(request, 'minha_conta.html', {
         'username': request.user.username,
     })
+
+def redes_sociais_view(request):
+    return render(request, 'redes_sociais.html')
+
+def sobre_view(request):
+    return render(request, 'sobre.html')
