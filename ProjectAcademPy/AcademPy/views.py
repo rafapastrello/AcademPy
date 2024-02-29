@@ -24,7 +24,10 @@ def home_view(request):
     return render(request, 'home.html', {
         'username': request.user.username,
     })
-    
+
+def index_view(request):
+    return render(request, 'index.html')
+
 def login_view(request):
     if request.method == 'GET':
         return render(request, 'login.html', {

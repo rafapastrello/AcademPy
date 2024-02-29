@@ -20,7 +20,8 @@ from AcademPy import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home_view),
+    path('', views.index_view),
+    path('home/', views.home_view),
     path('cadastro/', views.cadastro_view),
     path('login/', views.login_view),
     path('logout/', views.logout_view),

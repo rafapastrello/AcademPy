@@ -30,7 +30,7 @@
 
 <body class="bg-dark">
     <!-- Cabeçalho -->
-    <header class="bg-black px-2">
+    <header class="bg-black px-2 pt-2">
         <nav class="navbar navbar-expand-lg navbar-dark">
             <a class="navbar-brand" href="/">
                 <h4>Academ<span class="text-primary">Py</span></h4>
@@ -42,7 +42,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="/home">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/minha-conta">Minha Conta</a>
@@ -63,8 +63,8 @@
             </div>
         </nav>
 
-        <p class="text-light">>>> Logado como: {{username}}</p>
-
+        <p class="bg-black text-light pb-2">{% block logado %}{% endblock logado %}</p>
+        
     </header>
 
     <main class="container-fluid">
