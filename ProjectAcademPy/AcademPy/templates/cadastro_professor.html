@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcademPy - Cadastro Professor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static "img/logos/HB-logo.png" %}" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;500&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <!-- V.4 -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- V.5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+</head>
+
+<body class="bg-black">
+    <!-- Cabeçalho -->
+    <header class="bg-black px-2 pt-2">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="/">
+                <h4>Academ<span class="text-primary">Py</span></h4>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <button class="btn btn-light" id="theme-toggle">Tema Claro</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="bg-black p-3">
+        <!-- Conteúdo da página de cadastro do Professor -->
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mt-2 mb-4">Identificação da equipe acadêmica</h2>
+
+                        {% if email_repeated %}
+                            <p class="text-danger">Email em uso!</p>
+                        {% endif %}
+
+                        <!-- Formulário de Cadastro -->
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-floating mb-3 text-dark">
+                                <input type="number" class="form-control" name="cod" id="cod" placeholder="Código da equipe acadêmica" required>
+                                <label for="cod">Código da equipe acadêmica*</label>
+                            </div>
+
+                            <div class="form-floating mb-3 text-dark">
+                                <input type="name" class="form-control" name="username" id="username" placeholder="Nome" required>
+                                <label for="username">Nome completo*</label>
+                            </div>
+
+                            <div class="form-floating mb-3 text-dark">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="email">
+                                <label for="email">Email*</label>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="inputGroupSelect01">Especialização</label>
+                                <select class="form-select" id="inputGroupSelect01">
+                                    <option value="Art">Arte</option>
+                                    <option value="Bio">Biologia</option>
+                                    <option value="Ed-Fís">Ed. Física</option>
+                                    <option value="Esp">Espanhol</option>
+                                    <option value="Fil">Filosofia</option>
+                                    <option value="Fís">Física</option>
+                                    <option value="Geo">Geografia</option>
+                                    <option value="His">História</option>
+                                    <option value="Ing">Inglês</option>
+                                    <option value="Mat">Matemática</option>
+                                    <option value="Por">Português</option>
+                                    <option value="PV">Projeto de vida</option>
+                                    <option value="Quí">Química</option>
+                                    <option value="Soc">Sociologia</option>
+                                </select>
+                            </div>
+
+                            <div class="bg-primary bg-opacity-10 rounded mb-3 p-2">
+                                <p>Disponibilidade</p>
+
+                                <input type="checkbox" class="btn-check" id="Manhã" autocomplete="off">
+                                <label class="btn" for="Manhã">Manhã</label>
+
+                                <input type="checkbox" class="btn-check" id="Tarde" autocomplete="off">
+                                <label class="btn" for="Tarde">Tarde</label>
+
+                                <input type="checkbox" class="btn-check" id="Noite" autocomplete="off">
+                                <label class="btn" for="Noite">Noite</label>
+                            </div>
+
+                            <div class="form-row mb-3 text-dark">
+                                <div class="form-floating col-md-6 mb-3 text-dark">
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Senha" required>
+                                    <label for="password">Senha*</label>
+                                </div>
+                                <div class="form-floating col-md-6 mb-3 text-dark">
+                                    <input type="password" class="form-control" name="confirma_password" placeholder="Confirmar Senha" required>
+                                    <label for="confirma_password">Confirmar Senha*</label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">Criar Conta</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="text-white text-center bg-black pt-3 pb-1">
+        <div class="container-fluid">
+            <p>&copy; 2024 AcademPy. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Adicionando funcionalidade de alternar tema
+        document.getElementById('theme-toggle').addEventListener('click', function () {
+            document.body.classList.toggle('dark-theme');
+            if (document.body.classList.contains('dark-theme')) {
+                document.getElementById('theme-toggle').textContent = 'Tema Claro';
+            } else {
+                document.getElementById('theme-toggle').textContent = 'Tema Escuro';
+            }
+        });
+    </script>
+</body>
+
+</html>

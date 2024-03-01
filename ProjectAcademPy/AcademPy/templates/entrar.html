@@ -39,22 +39,56 @@
     <section class="bg-black text-white p-3">
     <!-- Conteúdo -->
         <div class="row my-5">
-            <div class="col-sm-6 mb-3 mb-sm-0">
+            <div class="col-sm-4 mb-3 mb-sm-0">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Login</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Login</a>
+                        <h3 class="card-title mb-0">Login</h3>
+                        <p class="card-text font-weight-light mt-0 mb-4">Faça login inserindo seus dados de acesso.</p>
+    
+                        <!-- Formulário de Login -->
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-floating mb-3 text-dark">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="email" required>
+                                <label for="email">Email</label>
+                            </div> 
+    
+                            <div class="form-floating text-dark">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
+                                <label for="password">Senha</label>
+                            </div>
+
+                            <a href="#" class="text-primary text-right nav-link mb-3">Esqueceu a senha?</a>
+    
+                            {% if incorrect_login %}
+                                <p class="text-danger">Email ou senha incorreto(s)!</p>
+                            {% endif %}
+    
+                            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                        </form>
+    
                     </div>
                 </div>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-sm-4 mb-3 mb-sm-0">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Cadastro</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h3 class="card-title mb-0">Cadastro</h3>
+                        <p class="card-text font-weight-light mt-0 mb-4">Determine a opção de registro.</p>
+                        <div class="form-floating mb-3 text-dark">
+                            <a target=”_blank” class="btn btn-outline-black btn-block border me-2 d-flex justify-content-between align-items-center" href="/cadastro-professor">
+                                <span>Professor</span>
+                                <img width="10px" src="{% static '/img/icones/seta_preta.png' %}">
+                            </a>
+                        </div>
+
+                        <div class="form-floating mb-3 text-dark">
+                            <a target=”_blank” class="btn btn-outline-black btn-block border me-2 d-flex justify-content-between align-items-center" href="/cadastro-adm">
+                                <span>Administrador</span>
+                                <img width="10px" src="{% static '/img/icones/seta_preta.png' %}">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -62,7 +96,7 @@
     </section>
 
     <!-- Rodapé -->
-    <footer class="text-white text-center bg-black py-2 mt-4">
+    <footer class="text-white text-center bg-black py-4 mt-4">
         <div class="container-fluid">
             <p>&copy; 2024 AcademPy. Todos os direitos reservados.</p>
         </div>
