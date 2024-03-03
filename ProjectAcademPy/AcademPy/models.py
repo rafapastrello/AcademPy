@@ -6,7 +6,6 @@ class Administrador(models.Model):
     cod_academ = models.CharField(max_length=10)
 
 class Disciplina(models.Model):
-    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100)
 
 class Professor(models.Model):
@@ -15,6 +14,5 @@ class Professor(models.Model):
     cod_academ = models.CharField(max_length=10)
 
 class Turma(models.Model):
-    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100)
     turno = models.CharField(max_length=5)
