@@ -39,13 +39,6 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <button class="btn btn-light" id="theme-toggle">Tema Claro</button>
-                    </li>
-                </ul>
-            </div>
         </nav>
     </header>
 
@@ -61,17 +54,25 @@
                             <p class="text-danger">Email em uso!</p>
                         {% endif %}
 
+                        {% if cod_invalid %}
+                            <p class="text-danger">Código acadêmico inválido!</p>
+                        {% endif %}
+
+                        {% if password_invalid %}
+                            <p class="text-danger">Senhas não correspondem!</p>
+                        {% endif %}
+
                         <!-- Formulário de Cadastro -->
                         <form method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-floating mb-3 text-dark">
-                                <input type="number" class="form-control" name="cod" id="cod" placeholder="Código da equipe acadêmica" required>
-                                <label for="cod">Código da equipe acadêmica*</label>
+                                <input type="password" class="form-control" name="cod_academ" id="cod_academ" placeholder="Código da equipe acadêmica" required>
+                                <label for="cod_academ">Código da equipe acadêmica*</label>
                             </div>
 
                             <div class="form-floating mb-3 text-dark">
-                                <input type="name" class="form-control" name="username" id="username" placeholder="Nome" required>
-                                <label for="username">Nome completo*</label>
+                                <input type="name" class="form-control" name="nome" id="nome" placeholder="Nome" required>
+                                <label for="nome">Nome completo*</label>
                             </div>
 
                             <div class="form-floating mb-3 text-dark">
@@ -80,8 +81,8 @@
                             </div>
 
                             <div class="input-group mb-3">
-                                <label class="input-group-text" for="inputGroupSelect01">Especialização</label>
-                                <select class="form-select" id="inputGroupSelect01">
+                                <label class="input-group-text" for="especializacao">Especialização</label>
+                                <select class="form-select" id="especializacao" name="especializacao">
                                     <option value="Art">Arte</option>
                                     <option value="Bio">Biologia</option>
                                     <option value="Ed-Fís">Ed. Física</option>
@@ -102,14 +103,14 @@
                             <div class="bg-primary bg-opacity-10 rounded mb-3 p-2">
                                 <p>Disponibilidade</p>
 
-                                <input type="checkbox" class="btn-check" id="Manhã" autocomplete="off">
-                                <label class="btn" for="Manhã">Manhã</label>
+                                <input type="checkbox" class="btn-check" id="manha" name="manha">
+                                <label class="btn" for="manha">Manhã</label>
 
-                                <input type="checkbox" class="btn-check" id="Tarde" autocomplete="off">
-                                <label class="btn" for="Tarde">Tarde</label>
+                                <input type="checkbox" class="btn-check" id="tarde" name="tarde">
+                                <label class="btn" for="tarde">Tarde</label>
 
-                                <input type="checkbox" class="btn-check" id="Noite" autocomplete="off">
-                                <label class="btn" for="Noite">Noite</label>
+                                <input type="checkbox" class="btn-check" id="noite" name="noite">
+                                <label class="btn" for="noite">Noite</label>
                             </div>
 
                             <div class="form-row mb-3 text-dark">
@@ -143,18 +144,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        // Adicionando funcionalidade de alternar tema
-        document.getElementById('theme-toggle').addEventListener('click', function () {
-            document.body.classList.toggle('dark-theme');
-            if (document.body.classList.contains('dark-theme')) {
-                document.getElementById('theme-toggle').textContent = 'Tema Claro';
-            } else {
-                document.getElementById('theme-toggle').textContent = 'Tema Escuro';
-            }
-        });
-    </script>
 </body>
 
 </html>

@@ -3,15 +3,16 @@ from django.contrib.auth.models import User
 
 class Administrador(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    cod_academ = models.CharField(max_length=10)
 
 class Disciplina(models.Model):
     nome = models.CharField(max_length=100)
 
 class Professor(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    disponibilidade = models.CharField(max_length=19)
-    cod_academ = models.CharField(max_length=10)
+    especializacao = models.CharField(max_length=100)
+    disponibilidade_manha = models.BooleanField()
+    disponibilidade_tarde = models.BooleanField()
+    disponibilidade_noite = models.BooleanField()
 
 class Turma(models.Model):
     nome = models.CharField(max_length=100)
