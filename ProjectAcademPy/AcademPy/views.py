@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect, HttpResponseBadRequest, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Administrador, Professor 
@@ -121,9 +121,19 @@ def entrar_view(request):
 
 @login_required(login_url='/entrar')
 def home_view(request):
-    return render(request, 'home.html', {
-        'username': request.user.username,
-    })
+    if Administrador.objects.filter(usuario=request.user).exists():
+        # É administrador
+        return render(request, 'home_adm.html', {
+            'username': request.user.username,
+        })
+    elif Professor.objects.filter(usuario=request.user).exists():
+        # É professor
+        return render(request, 'home_professor.html', {
+            'username': request.user.username,
+        })
+    else:
+        # Não é professor nem administrador
+        return HttpResponseRedirect('/entrar')
 
 def index_view(request):
     return render(request, 'index.html')
@@ -142,10 +152,23 @@ def logout_view(request):
 
 @login_required(login_url='/entrar')
 def minha_conta_view(request):
-    return render(request, 'minha_conta.html', {
-        'username': request.user.username,
-        'nome': request.user.first_name + " " + request.user.last_name,
-    })
+    if Administrador.objects.filter(usuario=request.user).exists():
+        # É administrador
+        return render(request, 'minha_conta_adm.html', {
+            'username': request.user.username,
+            'nome': request.user.first_name + " " + request.user.last_name,
+        })
+    elif Professor.objects.filter(usuario=request.user).exists():
+        # É professor
+        professor = Professor.objects.get(usuario=request.user)
+        return render(request, 'minha_conta_professor.html', {
+            'username': request.user.username,
+            'nome': request.user.first_name + " " + request.user.last_name,
+            'professor': professor,
+        })
+    else:
+        # Não é professor nem administrador
+        return HttpResponseRedirect('/entrar')
 
 def redes_sociais_view(request):
     return render(request, 'redes_sociais.html')

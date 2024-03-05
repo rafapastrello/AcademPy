@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}Minha Conta{% endblock titulo %}
+
+{% block logado %}>>> Logado como: {{username}}{% endblock logado %}
+
+{% block conteudo %}
+<nav class="mt-1 mb-1">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link text-white bg-secondary active" aria-current="page" href="/minha-conta">Minha Conta</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="/login-e-seguranca">Login e Segurança</a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Informações da conta -->
+<h3 class="text-white mt-5 mb-3">Informações da Conta</h3>
+<hr>
+<form>
+    <div class="form-group d-flex align-items-center">
+        <label class="col-2 text-light" for="nome">Nome:</label>
+        <input type="text" class="col-5 form-control ml-3" id="nome" value="{{nome}}">
+        <button type="submit" class="btn btn-secondary btn-sm ml-2">Alterar nome</button>
+    </div>
+
+    <div class="form-group d-flex align-items-center">
+        <label class="col-2 text-light" for="especializacao">Especialização:</label>
+        <select class="form-select col-5 form-control ml-3" id="especializacao" name="especializacao">
+            <option selected>{{professor.especializacao}}</option>
+            <option value="Art">Arte</option>
+            <option value="Bio">Biologia</option>
+            <option value="Ed-Fís">Ed. Física</option>
+            <option value="Esp">Espanhol</option>
+            <option value="Fil">Filosofia</option>
+            <option value="Fís">Física</option>
+            <option value="Geo">Geografia</option>
+            <option value="His">História</option>
+            <option value="Ing">Inglês</option>
+            <option value="Mat">Matemática</option>
+            <option value="Por">Português</option>
+            <option value="PV">Projeto de vida</option>
+            <option value="Quí">Química</option>
+            <option value="Soc">Sociologia</option>
+        </select>
+        <button type="submit" class="btn btn-secondary btn-sm ml-2">Alterar Especialização</button>
+    </div>
+
+    <div class="form-group d-flex align-items-center">
+        
+        <label class="col-2 text-light" for="disponibilidade">Disponibilidade:</label>
+        <div class="col-5 form-group d-flex align-items-center bg-white bg-opacity-70 rounded mb-3 p-2 ml-3">
+            <input type="checkbox" class="btn-check" id="manha" name="manha" {% if professor.disponibilidade_manha%} checked {% endif %}>
+            <label class="btn mx-1" for="manha">Manhã</label>
+
+            <input type="checkbox" class="btn-check" id="tarde" name="tarde" {% if professor.disponibilidade_tarde%}checked {% endif %}>
+            <label class="btn mx-1" for="tarde">Tarde</label>
+
+            <input type="checkbox" class="btn-check" id="noite" name="noite" {% if professor.disponibilidade_noite%}checked {% endif %}>
+            <label class="btn mx-1" for="noite">Noite</label>
+        </div>
+        <button type="submit" class="btn btn-secondary btn-sm ml-2">Alterar Disponibilidade</button>
+    </div>
+</form>
+
+
+{% endblock conteudo %}
