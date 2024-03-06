@@ -98,6 +98,12 @@ def cadastro_professor_view(request):
         return HttpResponseRedirect('/minha-conta')
     else:
         return HttpResponseBadRequest()
+    
+def criar_cronograma_view(request):
+    return render(request, 'criar-cronograma.html')
+
+def disciplinas_view(request):
+    return render(request, 'disciplinas.html')
 
 def entrar_view(request):
     if request.method == 'GET':
@@ -139,13 +145,6 @@ def index_view(request):
     return render(request, 'index.html')
 
 @login_required(login_url='/entrar')
-def login_e_seguranca_view(request):
-    return render(request, 'login_e_seguranca.html', {
-        'username': request.user.username,
-        'email': request.user.email,
-    })
-
-@login_required(login_url='/entrar')
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
@@ -157,6 +156,7 @@ def minha_conta_view(request):
         return render(request, 'minha_conta_adm.html', {
             'username': request.user.username,
             'nome': request.user.first_name + " " + request.user.last_name,
+            'email': request.user.email,
         })
     elif Professor.objects.filter(usuario=request.user).exists():
         # É professor
@@ -164,14 +164,18 @@ def minha_conta_view(request):
         return render(request, 'minha_conta_professor.html', {
             'username': request.user.username,
             'nome': request.user.first_name + " " + request.user.last_name,
+            'email': request.user.email,
             'professor': professor,
         })
     else:
         # Não é professor nem administrador
         return HttpResponseRedirect('/entrar')
 
+def professores_view(request):
+    return render(request, 'professores.html')
+
 def redes_sociais_view(request):
     return render(request, 'redes_sociais.html')
 
-def sobre_view(request):
-    return render(request, 'sobre.html')
+def turmas_view(request):
+    return render(request, 'turmas.html')

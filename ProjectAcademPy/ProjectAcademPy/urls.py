@@ -27,11 +27,9 @@ urlpatterns = [
     path('disciplinas/', views.disciplinas_view),
     path('entrar/', views.entrar_view),
     path('home/', views.home_view),
-    path('login-e-seguranca/', views.login_e_seguranca_view),
     path('logout/', views.logout_view),
     path('minha-conta/', views.minha_conta_view),
     path('professores/', views.professores_view),
     path('redes-sociais/', views.redes_sociais_view),
-    path('sobre/', views.sobre_view),
     path('turmas/', views.turmas_view),
 ]

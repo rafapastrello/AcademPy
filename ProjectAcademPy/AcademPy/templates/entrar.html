@@ -1,112 +1,72 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-BR">
 
-<head>
-    <!-- Meta tags -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AcademPy</title>
+{% block titulo %}Entrar{% endblock titulo %}
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="{% static "img/logos/HB-logo.png" %}" type="image/x-icon">
+{% block links_cabecalho %}
+    <li class="nav-item">
+        <a class="btn btn-outline-light border border-1 fw-light me-2" href="javascript:history.back()">⭠ Voltar</a>
+    </li>
+{% endblock links_cabecalho %}
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;500&display=swap" rel="stylesheet">
+{% block logado %}{% endblock logado %}
 
-    <!-- Bootstrap CSS -->
-    <!-- V.4 -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+{% block conteudo %}
+    <div class="row my-5">
+        <div class="col-sm-4 mb-3 mb-sm-0">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title mb-0">Login</h3>
+                    <p class="card-text font-weight-light mt-0 mb-4">Faça login inserindo seus dados de acesso.</p>
 
-    <!-- V.5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+                    <!-- Formulário de Login -->
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="email" required>
+                            <label for="email">Email</label>
+                        </div> 
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css'%}">
-</head>
+                        <div class="form-floating text-dark">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
+                            <label for="password">Senha</label>
+                        </div>
 
-<body class="bg-dark">
-    <!-- Cabeçalho -->
-    <header class="bg-black px-2 pt-4">
-        <a class="navbar-brand text-white" href="/">
-            <h4>Academ<span class="text-primary">Py</span></h4>
-        </a>
-    </header>
+                        <a href="#" class="text-primary text-right nav-link mb-3">Esqueceu a senha?</a>
 
-    <section class="bg-black text-white p-3">
-    <!-- Conteúdo -->
-        <div class="row my-5">
-            <div class="col-sm-4 mb-3 mb-sm-0">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title mb-0">Login</h3>
-                        <p class="card-text font-weight-light mt-0 mb-4">Faça login inserindo seus dados de acesso.</p>
-    
-                        <!-- Formulário de Login -->
-                        <form method="POST">
-                            {% csrf_token %}
-                            <div class="form-floating mb-3 text-dark">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="email" required>
-                                <label for="email">Email</label>
-                            </div> 
-    
-                            <div class="form-floating text-dark">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
-                                <label for="password">Senha</label>
-                            </div>
+                        {% if incorrect_login %}
+                            <p class="text-danger">Email ou senha incorreto(s)!</p>
+                        {% endif %}
 
-                            <a href="#" class="text-primary text-right nav-link mb-3">Esqueceu a senha?</a>
-    
-                            {% if incorrect_login %}
-                                <p class="text-danger">Email ou senha incorreto(s)!</p>
-                            {% endif %}
-    
-                            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-                        </form>
-    
-                    </div>
+                        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                    </form>
+
                 </div>
             </div>
+        </div>
 
-            <div class="col-sm-4 mb-3 mb-sm-0">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title mb-0">Cadastro</h3>
-                        <p class="card-text font-weight-light mt-0 mb-4">Determine a opção de registro.</p>
-                        <div class="form-floating mb-3 text-dark">
-                            <a target=”_blank” class="btn btn-outline-black btn-block border me-2 d-flex justify-content-between align-items-center" href="/cadastro-professor">
-                                <span>Professor</span>
-                                <img width="10px" src="{% static '/img/icones/seta_preta.png' %}">
-                            </a>
-                        </div>
+        <div class="col-sm-4 mb-3 mb-sm-0">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title mb-0">Cadastro</h3>
+                    <p class="card-text font-weight-light mt-0 mb-4">Determine a opção de registro.</p>
+                    <div class="form-floating mb-3 text-dark">
+                        <a target=”_blank” class="btn btn-outline-black btn-block border me-2 d-flex justify-content-between align-items-center" href="/cadastro-professor">
+                            <span>Professor</span>
+                            <img width="10px" src="{% static '/img/icones/seta_preta.png' %}">
+                        </a>
+                    </div>
 
-                        <div class="form-floating mb-3 text-dark">
-                            <a target=”_blank” class="btn btn-outline-black btn-block border me-2 d-flex justify-content-between align-items-center" href="/cadastro-adm">
-                                <span>Administrador</span>
-                                <img width="10px" src="{% static '/img/icones/seta_preta.png' %}">
-                            </a>
-                        </div>
+                    <div class="form-floating mb-3 text-dark">
+                        <a target=”_blank” class="btn btn-outline-black btn-block border me-2 d-flex justify-content-between align-items-center" href="/cadastro-adm">
+                            <span>Administrador</span>
+                            <img width="10px" src="{% static '/img/icones/seta_preta.png' %}">
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+{% endblock conteudo %}
 
-    <!-- Rodapé -->
-    <footer class="text-white text-center bg-black py-4 mt-4">
-        <div class="container-fluid">
-            <p>&copy; 2024 AcademPy. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS dependencies -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+{% block extra %}{% endblock extra %}

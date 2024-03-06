@@ -1,15 +1,25 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block titulo %}Home{% endblock titulo %}
+{% block titulo %}Home Professor{% endblock titulo %}
+
+{% block links_cabecalho %}
+    <li class="nav-item">
+        <a class="btn btn-light me-2" href="/home">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="btn btn-primary" href="/minha-conta">Minha Conta</a>
+    </li>
+{% endblock links_cabecalho %}
 
 {% block logado %}>>> Logado como: {{username}}{% endblock logado %}
 
 {% block conteudo %}
+    <h3 class="text-light">
+        HOME DO PROFESSOR
 
-<h3 class="text-light">
-    HOME DO PROFESSOR
-
-    Automatização da criação de cronogramas de matérias
-</h3>
-
+        Automatização da criação de cronogramas de matérias
+    </h3>
 {% endblock conteudo %}
+
+{% block extra %}{% endblock extra %}

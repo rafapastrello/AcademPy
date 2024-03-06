@@ -1,33 +1,26 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block titulo %}Cadastro Administrador{% endblock titulo %}
+{% block titulo %}Criar Cronograma{% endblock titulo %}
 
-{% block links_cabecalho %}{% endblock links_cabecalho %}
+{% block links_cabecalho %}
+    <li class="nav-item">
+        <a class="btn btn-outline-light border border-1 fw-light me-2" href="javascript:history.back()">⭠ Voltar</a>
+    </li>
+{% endblock links_cabecalho %}
 
 {% block logado %}{% endblock logado %}
 
 {% block conteudo %}
-    <!-- Conteúdo da página de cadastro do Administrador -->
+    <h1 class="text-white">Criar Cronograma</h1>
+
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="card">
                 <div class="card-body">
-                    <h2 class="card-title text-center mt-2 mb-4">Identificação da equipe acadêmica</h2>
+                    <h2 class="card-title text-center mt-2 mb-4">Insira as informações necessárias:</h2>
 
-                    {% if email_repeated %}
-                        <p class="text-danger">Email em uso!</p>
-                    {% endif %}
-
-                    {% if cod_invalid %}
-                        <p class="text-danger">Código acadêmico inválido!</p>
-                    {% endif %}
-
-                    {% if password_invalid %}
-                        <p class="text-danger">Senhas não correspondem!</p>
-                    {% endif %}
-
-                    <!-- Formulário de Cadastro -->
+                    <!-- Formulário de criação de Cronograma -->
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-floating mb-3 text-dark">
@@ -56,7 +49,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-block">Criar Conta</button>
+                        <button type="submit" class="btn btn-primary btn-block">Gerar Cronograma Acadêmico</button>
                     </form>
                 </div>
             </div>

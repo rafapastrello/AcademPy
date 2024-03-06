@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}Redes Sociais{% endblock titulo %}
+
+{% block links_cabecalho %}
+    <li class="nav-item">
+        <a class="btn btn-outline-light border border-1 fw-light me-2" href="/">⭠ Voltar</a>
+    </li>
+    <li class="nav-item mr-3">
+        <a class="btn btn-primary" href="/entrar">Entrar</a>
+    </li>
+{% endblock links_cabecalho %}
+
+{% block conteudo %}
+    <!-- Conteúdo da Página Redes Sociais -->
+    <div class="row ">
+        <div class="col-md-8 offset-md-2">
+            <div class="card bg-black">
+                <h2 class="card-title text-white mt-4 mb-4">Nossas Redes Sociais</h2>
+
+                <ul class="list-group">
+                    <li class="list-group-item p-3">
+                        <img width="40" src="{% static 'img/logos/logo2-github.png' %}" alt="GitHub Logo"
+                            class="social-logo img-fluid mr-2">
+                        <a class="text-primary" href="https://github.com/rafllosilva" target="_blank">GitHub</a>
+                    </li>
+                    <li class="list-group-item p-3">
+                        <img width="40" src="{% static 'img/logos/logo-discord.png' %}" alt="Discord Logo"
+                            class="social-logo img-fluid mr-2">
+                        <a class="text-primary" href="https://discord.com/users/1065050312420900934/" target="_blank">Discord</a>
+                    </li>
+                    <li class="list-group-item p-3">
+                        <img width="40" src="{% static 'img/logos/logo-instagram.png' %}" alt="Instagram Logo"
+                            class="social-logo img-fluid mr-2">
+                        <a class="text-primary" href="https://www.instagram.com/rafa.pastrello/" target="_blank">Instagram</a>
+                    </li>
+                    <li class="list-group-item p-3">
+                        <img width="40" src="{% static 'img/logos/logo-facebook.png' %}" alt="Facebook Logo"
+                            class="social-logo img-fluid mr-2">
+                        <a class="text-primary" href="https://www.facebook.com/raf.llosilva/" target="_blank">Facebook</a>
+                    </li>
+                    <li class="list-group-item p-3">
+                        <img width="40" src="{% static 'img/logos/logo-linkedin.png' %}" alt="LinkedIn Logo"
+                            class="social-logo img-fluid mr-2">
+                        <a class="text-primary" href="https://www.linkedin.com/in/rafaela-pastrello-silva-049801283/"
+                            target="_blank">LinkedIn</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock conteudo %}
+
+{% block extra %}{% endblock extra %}
