@@ -98,9 +98,12 @@ def cadastro_professor_view(request):
         return HttpResponseRedirect('/minha-conta')
     else:
         return HttpResponseBadRequest()
-    
+
 def criar_cronograma_view(request):
-    return render(request, 'criar-cronograma.html')
+    return render(request, 'criar_cronograma.html')
+
+def cronograma_view(request):
+    return render(request, 'cronograma.html')
 
 def disciplinas_view(request):
     return render(request, 'disciplinas.html')

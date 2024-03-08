@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}Criar Cronograma{% endblock titulo %}
+
+{% block links_cabecalho %}
+    <li class="nav-item">
+        <a class="btn btn-outline-light border border-1 fw-light me-2" href="/home/">⭠ Voltar</a>
+    </li>
+{% endblock links_cabecalho %}
+
+{% block logado %}{% endblock logado %}
+
+{% block conteudo %}
+    <h1 class="text-white mb-5">Criar Cronograma</h1>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card mb-5">
+                <div class="card-body">
+                    <h2 class="card-title text-center mt-2 mb-5">Insira as informações necessárias:</h2>
+
+                    <!-- Formulário de criação de Cronograma -->
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+                            <select class="form-select" id="multiple-select-clear-field-dias" data-placeholder="Dias da semana:" multiple>
+                                <option value="1">Domingo</option>
+                                <option value="2">Segunda-feira</option>
+                                <option value="3">Terça-feira</option>
+                                <option value="4">Quarta-feira</option>
+                                <option value="5">Quinta-feira</option>
+                                <option value="6">Sexta-feira</option>
+                                <option value="7">Sábado</option>
+                            </select>
+                        </div>
+
+                        <div class="form-floating mb-4 text-dark">
+                            <input type="number" class="form-control" name="qtd_aulas" placeholder="Quantidade de aulas por dia*" required>
+                            <label for="qtd_aulas">Quantidade de aulas por dia*</label>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <select class="form-select" id="multiple-select-clear-field-disciplinas" data-placeholder="Disciplinas:" multiple>
+                                <option value="Art">Arte</option>
+                                <option value="Bio">Biologia</option>
+                                <option value="Ed-Fís">Ed. Física</option>
+                                <option value="Esp">Espanhol</option>
+                                <option value="Fil">Filosofia</option>
+                                <option value="Fís">Física</option>
+                                <option value="Geo">Geografia</option>
+                                <option value="His">História</option>
+                                <option value="Ing">Inglês</option>
+                                <option value="Mat">Matemática</option>
+                                <option value="Por">Português</option>
+                                <option value="PV">Projeto de vida</option>
+                                <option value="Quí">Química</option>
+                                <option value="Soc">Sociologia</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <select class="form-select" id="multiple-select-clear-field-professores" data-placeholder="Professores:" multiple>
+                                <option value="Art">Arte</option>
+                                <option value="Bio">Biologia</option>
+                                <option value="Ed-Fís">Ed. Física</option>
+                                <option value="Esp">Espanhol</option>
+                                <option value="Fil">Filosofia</option>
+                                <option value="Fís">Física</option>
+                                <option value="Geo">Geografia</option>
+                                <option value="His">História</option>
+                                <option value="Ing">Inglês</option>
+                                <option value="Mat">Matemática</option>
+                                <option value="Por">Português</option>
+                                <option value="PV">Projeto de vida</option>
+                                <option value="Quí">Química</option>
+                                <option value="Soc">Sociologia</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <select class="form-select" id="multiple-select-clear-field-turmas" data-placeholder="Turmas:" multiple>
+                                <option value="Art">Arte</option>
+                                <option value="Bio">Biologia</option>
+                                <option value="Ed-Fís">Ed. Física</option>
+                                <option value="Esp">Espanhol</option>
+                                <option value="Fil">Filosofia</option>
+                                <option value="Fís">Física</option>
+                                <option value="Geo">Geografia</option>
+                                <option value="His">História</option>
+                                <option value="Ing">Inglês</option>
+                                <option value="Mat">Matemática</option>
+                                <option value="Por">Português</option>
+                                <option value="PV">Projeto de vida</option>
+                                <option value="Quí">Química</option>
+                                <option value="Soc">Sociologia</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block mt-4">Gerar Cronograma Acadêmico</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock conteudo %}
+
+{% block extra %}{% endblock extra %}

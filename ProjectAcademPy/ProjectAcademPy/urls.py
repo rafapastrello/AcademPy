@@ -24,6 +24,7 @@ urlpatterns = [
     path('cadastro-adm/', views.cadastro_adm_view),
     path('cadastro-professor/', views.cadastro_professor_view),
     path('criar-cronograma/', views.criar_cronograma_view),
+    path('cronograma/', views.cronograma_view),
     path('disciplinas/', views.disciplinas_view),
     path('entrar/', views.entrar_view),
     path('home/', views.home_view),

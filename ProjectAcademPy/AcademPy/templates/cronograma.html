@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}Criar Cronograma{% endblock titulo %}
+
+{% block links_cabecalho %}
+    <li class="nav-item">
+        <a class="btn btn-outline-light border border-1 fw-light me-2" href="/home/">⭠ Voltar</a>
+    </li>
+{% endblock links_cabecalho %}
+
+{% block logado %}{% endblock logado %}
+
+{% block conteudo %}
+    <h1 class="text-white mb-5">Cronograma Acadêmico Gerado</h1>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Primeiro</th>
+                    <th scope="col">Último</th>
+                    <th scope="col">Nickname</th>
+                    <th scope="col">Primeiro</th>
+                    <th scope="col">Último</th>
+                    <th scope="col">Nickname</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td colspan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+{% endblock conteudo %}
+
+{% block extra %}{% endblock extra %}
