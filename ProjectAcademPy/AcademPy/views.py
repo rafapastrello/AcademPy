@@ -108,6 +108,14 @@ def cronograma_view(request):
 def disciplinas_view(request):
     return render(request, 'disciplinas.html')
 
+def editar_turma_view(request, id):
+    id_turma = Turma.objects.get(id=id)
+    turma = Turma.objects.all()
+    return render(request, 'editar_turma.html', {
+        'id_turma': id_turma,
+        'turma': turma,
+    })
+
 def entrar_view(request):
     if request.method == 'GET':
         return render(request, 'entrar.html', {

@@ -26,6 +26,7 @@ urlpatterns = [
     path('criar-cronograma/', views.criar_cronograma_view),
     path('cronograma/', views.cronograma_view),
     path('disciplinas/', views.disciplinas_view),
+    path('editar-turma/<int:id>', views.editar_turma_view, name='editar-turma'),
     path('entrar/', views.entrar_view),
     path('home/', views.home_view),
     path('logout/', views.logout_view),

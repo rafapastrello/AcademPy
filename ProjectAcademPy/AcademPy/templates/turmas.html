@@ -34,7 +34,7 @@
                                         <td>{{turma.nome}}</td>
                                         <td>{{turma.turno}}</td>
                                         <td>
-                                            <button class="btn btn-secondary btn-sm ml-2">Alterar</button>
+                                            <button class="btn btn-secondary btn-sm ml-2"><a class="link-offset-2 link-underline link-underline-opacity-0 text-white" href="{% url 'editar-turma' turma.id %}">Editar</a></button>
                                             <button class="btn btn-danger btn-sm">Excluir</button>
                                         </td>
                                     </tr>
@@ -113,12 +113,11 @@
         <div class="col-sm-4 mb-3 mb-sm-0">
             <div class="card">
                 <div class="card-body">
+                    <h3 class="card-title mb-4">Cadastrar Turma</h3>
 
                     <!-- Formulário de Cadastro da Turma -->
                     <form method="POST">
                         {% csrf_token %}
-                        <h3 class="card-title mb-4">Cadastrar Turma</h3>
-
                         <div class="form-floating mb-3 text-dark">
                             <input type="text" class="form-control text-uppercase" name="nome_turma" id="nome_turma" placeholder="Nome">
                             <label for="nome_turma">Nome*</label>

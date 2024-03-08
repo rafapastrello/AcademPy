@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}Turmas{% endblock titulo %}
+
+{% block links_cabecalho %}
+    <li class="nav-item">
+        <a class="btn btn-outline-light border border-1 fw-light me-2" href="/home/">⭠ Voltar</a>
+    </li>
+{% endblock links_cabecalho %}
+
+{% block conteudo %}
+    <h1 class="text-white">Turmas</h1>
+
+    <div class="row my-5">
+        <div class="col-sm-8 mb-3 mb-sm-0">
+            <div class="card">
+                <div class="card-body">
+
+                    <h3 class="card-title">Editar Turma</h3>
+
+                    <!-- Formulário de Editar Turma -->
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="text" class="form-control text-uppercase" name="nome_turma" id="nome_turma" placeholder="Nome">
+                            <label for="nome_turma">{{turma.nome}}</label>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="turno_turma">Turno:</label>
+                            <select class="form-select" id="turno_turma" name="turno_turma" required>
+                                <option value="manha">Manhã</option>
+                                <option value="tarde">Tarde</option>
+                                <option value="noite">Noite</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock conteudo %}
+
+{% block extra %}{% endblock extra %}
