@@ -24,8 +24,17 @@
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
 
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="turno">Turno:</label>
+                            <select class="form-select" id="turno" name="turno" required>
+                                <option value="manha">Manhã</option>
+                                <option value="tarde">Tarde</option>
+                                <option value="noite">Noite</option>
+                            </select>
+                        </div>
+
                         <div class="mb-4">
-                            <select class="form-select" id="multiple-select-clear-field-dias" data-placeholder="Dias da semana:" multiple>
+                            <select class="form-select" id="multiple-select-clear-field-dias" data-placeholder="Dias da semana:" multiple required>
                                 <option value="1">Domingo</option>
                                 <option value="2">Segunda-feira</option>
                                 <option value="3">Terça-feira</option>
@@ -42,7 +51,7 @@
                         </div>
                         
                         <div class="mb-4">
-                            <select class="form-select" id="multiple-select-clear-field-disciplinas" data-placeholder="Disciplinas:" multiple>
+                            <select class="form-select" id="multiple-select-clear-field-disciplinas" data-placeholder="Disciplinas:" multiple required>
                                 <option value="Art">Arte</option>
                                 <option value="Bio">Biologia</option>
                                 <option value="Ed-Fís">Ed. Física</option>
@@ -61,7 +70,7 @@
                         </div>
                         
                         <div class="mb-4">
-                            <select class="form-select" id="multiple-select-clear-field-professores" data-placeholder="Professores:" multiple>
+                            <select class="form-select" id="multiple-select-clear-field-professores" data-placeholder="Professores:" multiple required>
                                 <option value="Art">Arte</option>
                                 <option value="Bio">Biologia</option>
                                 <option value="Ed-Fís">Ed. Física</option>
@@ -80,7 +89,7 @@
                         </div>
                         
                         <div class="mb-4">
-                            <select class="form-select" id="multiple-select-clear-field-turmas" data-placeholder="Turmas:" multiple>
+                            <select class="form-select" id="multiple-select-clear-field-turmas" data-placeholder="Turmas:" multiple required>
                                 <option value="Art">Arte</option>
                                 <option value="Bio">Biologia</option>
                                 <option value="Ed-Fís">Ed. Física</option>

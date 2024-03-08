@@ -18,6 +18,9 @@ class Turma(models.Model):
     nome = models.CharField(max_length=100)
     turno = models.CharField(max_length=5)
 
+    class Meta:
+        ordering = ['nome']
+
 class Aula(models.Model):
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)

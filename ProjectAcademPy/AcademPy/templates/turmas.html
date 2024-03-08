@@ -10,7 +10,135 @@
 {% endblock links_cabecalho %}
 
 {% block conteudo %}
-<h1 class="text-white">Turmas cadastradas</h1>
+    <h1 class="text-white">Turmas</h1>
+
+    <div class="row my-5">
+        <div class="col-sm-8 mb-3 mb-sm-0">
+            <div class="card">
+                <div class="card-body">
+
+                    <h3 class="card-title">Turmas cadastradas</h3>
+
+                    <h5 class="text-primary mt-4">Manhã</h5>
+                    <div class="col-10 table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Turno</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for turma in manha %}
+                                    <tr>
+                                        <td>{{turma.nome}}</td>
+                                        <td>{{turma.turno}}</td>
+                                        <td>
+                                            <button class="btn btn-secondary btn-sm ml-2">Alterar</button>
+                                            <button class="btn btn-danger btn-sm">Excluir</button>
+                                        </td>
+                                    </tr>
+
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="2" class="text-danger">Nenhuma turma ainda.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5 class="text-primary mt-4">Tarde</h5>
+                    <div class="col-10 table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Turno</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for turma in tarde %}
+                                    <tr>
+                                        <td>{{turma.nome}}</td>
+                                        <td>{{turma.turno}}</td>
+                                        <td>
+                                            <button class="btn btn-secondary btn-sm ml-2">Alterar</button>
+                                            <button class="btn btn-danger btn-sm">Excluir</button>
+                                        </td>
+                                    </tr>
+
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="2" class="text-danger">Nenhuma turma ainda.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5 class="text-primary mt-4">Noite</h5>
+                    <div class="col-10 table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Turno</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for turma in noite %}
+                                    <tr>
+                                        <td>{{turma.nome}}</td>
+                                        <td>{{turma.turno}}</td>
+                                        <td>
+                                            <button class="btn btn-secondary btn-sm ml-2">Alterar</button>
+                                            <button class="btn btn-danger btn-sm">Excluir</button>
+                                        </td>
+                                    </tr>
+
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="2" class="text-danger">Nenhuma turma ainda.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 mb-3 mb-sm-0">
+            <div class="card">
+                <div class="card-body">
+
+                    <!-- Formulário de Cadastro da Turma -->
+                    <form method="POST">
+                        {% csrf_token %}
+                        <h3 class="card-title mb-4">Cadastrar Turma</h3>
+
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="text" class="form-control text-uppercase" name="nome_turma" id="nome_turma" placeholder="Nome">
+                            <label for="nome_turma">Nome*</label>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="turno_turma">Turno:</label>
+                            <select class="form-select" id="turno_turma" name="turno_turma" required>
+                                <option value="manha">Manhã</option>
+                                <option value="tarde">Tarde</option>
+                                <option value="noite">Noite</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock conteudo %}
 
 {% block extra %}{% endblock extra %}

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Administrador, Professor 
+from .models import Administrador, Professor, Turma
 
 def cadastro_adm_view(request):
     if request.method == 'GET':
@@ -181,4 +181,30 @@ def redes_sociais_view(request):
     return render(request, 'redes_sociais.html')
 
 def turmas_view(request):
-    return render(request, 'turmas.html')
+    turmas = Turma.objects.all()
+    manha = Turma.objects.filter(turno = "manha")
+    tarde = Turma.objects.filter(turno = "tarde")
+    noite = Turma.objects.filter(turno = "noite")
+    if request.method == 'GET':    
+        return render(request, 'turmas.html', {
+        'turmas': turmas,
+        'manha': manha,
+        'tarde': tarde,
+        'noite': noite,
+    })
+    elif request.method == 'POST':
+        nome_turma = request.POST.get("nome_turma")
+        turno_turma = request.POST.get("turno_turma")
+        
+        turma = Turma()
+        turma.nome = nome_turma
+        turma.turno = turno_turma
+        turma.save()
+        return render(request, 'turmas.html', {
+            'turmas': turmas,
+            'manha': manha,
+            'tarde': tarde,
+            'noite': noite,
+    })
+    else:
+        return HttpResponseBadRequest()

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block titulo %}Criar Cronograma{% endblock titulo %}
+{% block titulo %}Cronograma Gerado{% endblock titulo %}
 
 {% block links_cabecalho %}
     <li class="nav-item">
@@ -15,10 +15,10 @@
     <h1 class="text-white mb-5">Cronograma Acadêmico Gerado</h1>
 
     <div class="table-responsive">
-        <table class="table table-hover table-dark">
+        <table class="table table-bordered table-hover table-hover table-dark">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col"></th>
                     <th scope="col">Primeiro</th>
                     <th scope="col">Último</th>
                     <th scope="col">Nickname</th>
@@ -26,10 +26,10 @@
                     <th scope="col">Último</th>
                     <th scope="col">Nickname</th>
                 </tr>
-                </thead>
-                <tbody>
+            </thead>
+            <tbody>
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">1° aula</th>
                     <td>Mark</td>
                     <td>Otto</td>
                     <td>@mdo</td>
@@ -38,7 +38,7 @@
                     <td>@fat</td>
                 </tr>
                 <tr>
-                    <th scope="row">2</th>
+                    <th scope="row">2° aula</th>
                     <td>Jacob</td>
                     <td>Thornton</td>
                     <td>@fat</td>
@@ -47,16 +47,44 @@
                     <td>@fat</td>
                 </tr>
                 <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
+                    <th scope="row">3° aula</th>
+                    <td>Larry the Bird</td>
                     <td>@twitter</td>
                     <td>Jacob</td>
                     <td>Thornton</td>
                     <td>@fat</td>
+                    <td>Thornton</td>
                 </tr>
-                </tbody>
-            </table>
-        </div>
+                <tr>
+                    <th scope="row">4° aula</th>
+                    <td>Larry the Bird</td>
+                    <td>@twitter</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>Thornton</td>
+                </tr>
+                <tr>
+                    <th scope="row">5° aula</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">6° aula</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 {% endblock conteudo %}
 
 {% block extra %}{% endblock extra %}

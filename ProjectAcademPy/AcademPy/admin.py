@@ -17,4 +17,4 @@ class ProfessorAdmin(admin.ModelAdmin):
 
 @admin.register(Turma)
 class TurmaAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['nome', 'turno']
