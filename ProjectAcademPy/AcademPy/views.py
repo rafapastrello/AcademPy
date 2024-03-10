@@ -201,8 +201,10 @@ def turmas_view(request):
         'noite': noite,
     })
     elif request.method == 'POST':
-        nome_turma = request.POST.get("nome_turma")
+        entrada_nome_turma = request.POST.get("nome_turma")
         turno_turma = request.POST.get("turno_turma")
+
+        nome_turma = entrada_nome_turma.upper()
         
         turma = Turma()
         turma.nome = nome_turma
