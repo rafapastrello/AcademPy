@@ -10,7 +10,39 @@
 {% endblock links_cabecalho %}
 
 {% block conteudo %}
-<h1 class="text-white">Professores cadastrados</h1>
+    <h1 class="text-white">Professores</h1>
+
+    <div class="card my-5">
+        <div class="card-body">
+
+            <h3 class="card-title mb-5">Professores cadastrados</h3>
+
+            <p>Filtrar por:</p>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-disponibilidade-tab" data-bs-toggle="tab" data-bs-target="#nav-disponibilidade" type="button" role="tab" aria-controls="nav-disponibilidade" aria-selected="true">Disponibilidade</button>
+
+                <button class="nav-link" id="nav-especializacao-tab" data-bs-toggle="tab" data-bs-target="#nav-especializacao" type="button" role="tab" aria-controls="nav-especializacao" aria-selected="false">Especialização</button>
+            </div>
+
+            <div class="tab-content" id="nav-tabContent">
+
+                <div class="tab-pane fade show active" id="nav-disponibilidade" role="tabpanel" aria-labelledby="nav-disponibilidade-tab" tabindex="0">
+                    <!-- Disponibilidade -->
+                    <h3 class="mt-5 mb-3">Disponibilidade</h3>
+                    <hr>
+                    
+                </div>
+        
+                <div class="tab-pane fade" id="nav-especializacao" role="tabpanel" aria-labelledby="nav-especializacao-tab" tabindex="1">
+                    <!-- Especialização -->
+                    <h3 class="mt-5 mb-3">Especialização</h3>
+                    <hr>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
 {% endblock conteudo %}
 
 {% block extra %}{% endblock extra %}

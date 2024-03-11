@@ -216,13 +216,23 @@ def turmas_view(request):
         'manha': manha,
         'tarde': tarde,
         'noite': noite,
+        "turma_repetida": False,
     })
     elif request.method == 'POST':
         entrada_nome_turma = request.POST.get("nome_turma")
         turno_turma = request.POST.get("turno_turma")
 
         nome_turma = entrada_nome_turma.upper()
-        
+
+        if Turma.objects.filter(turno=turno_turma).filter(nome=nome_turma).exists():
+            return render(request, 'turmas.html', {
+            'turmas': turmas,
+            'manha': manha,
+            'tarde': tarde,
+            'noite': noite,
+            'turma_repetida': True,
+        })
+
         turma = Turma()
         turma.nome = nome_turma
         turma.turno = turno_turma
@@ -232,6 +242,6 @@ def turmas_view(request):
             'manha': manha,
             'tarde': tarde,
             'noite': noite,
-    })
+        })
     else:
         return HttpResponseBadRequest()

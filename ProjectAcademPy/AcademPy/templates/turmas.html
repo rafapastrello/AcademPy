@@ -115,6 +115,10 @@
                 <div class="card-body">
                     <h3 class="card-title mb-4">Cadastrar Turma</h3>
 
+                    {% if turma_repetida %}
+                        <p class="text-danger">Esta turma já existe!</p>
+                    {% endif %}
+
                     <!-- Formulário de Cadastro da Turma -->
                     <form method="POST">
                         {% csrf_token %}
