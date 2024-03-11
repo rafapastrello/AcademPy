@@ -5,7 +5,7 @@
 
 {% block links_cabecalho %}
     <li class="nav-item">
-        <a class="btn btn-outline-light border border-1 fw-light me-2" href="/home/">⭠ Voltar</a>
+        <a class="btn btn-outline-light border border-1 fw-light me-2" href="javascript:history.back()">⭠ Voltar</a>
     </li>
 {% endblock links_cabecalho %}
 
@@ -35,7 +35,7 @@
                                         <td>{{turma.turno}}</td>
                                         <td>
                                             <button class="btn btn-secondary btn-sm ml-2"><a class="link-offset-2 link-underline link-underline-opacity-0 text-white" href="{% url 'editar-turma' turma.id %}">Editar</a></button>
-                                            <button class="btn btn-danger btn-sm">Excluir</button>
+                                            <button class="btn btn-danger btn-sm"><a class="link-offset-2 link-underline link-underline-opacity-0 text-white" href="{% url 'excluir-turma' turma.id %}">Excluir</a></button>
                                         </td>
                                     </tr>
 
@@ -43,11 +43,11 @@
                                     <tr>
                                         <td colspan="2" class="text-danger">Nenhuma turma ainda.</td>
                                     </tr>
-                                {% endfor %}
+                                    {% endfor %}
                             </tbody>
                         </table>
                     </div>
-
+                    
                     <h5 class="text-primary mt-4">Tarde</h5>
                     <div class="col-10 table-responsive">
                         <table class="table table-hover">
@@ -59,24 +59,24 @@
                             </thead>
                             <tbody>
                                 {% for turma in tarde %}
-                                    <tr>
-                                        <td>{{turma.nome}}</td>
-                                        <td>{{turma.turno}}</td>
-                                        <td>
-                                            <button class="btn btn-secondary btn-sm ml-2">Alterar</button>
-                                            <button class="btn btn-danger btn-sm">Excluir</button>
-                                        </td>
+                                <tr>
+                                    <td>{{turma.nome}}</td>
+                                    <td>{{turma.turno}}</td>
+                                    <td>
+                                        <button class="btn btn-secondary btn-sm ml-2"><a class="link-offset-2 link-underline link-underline-opacity-0 text-white" href="{% url 'editar-turma' turma.id %}">Editar</a></button>
+                                        <button class="btn btn-danger btn-sm"><a class="link-offset-2 link-underline link-underline-opacity-0 text-white" href="{% url 'excluir-turma' turma.id %}">Excluir</a></button>
+                                    </td>
+                                </tr>
+                                
+                                {% empty %}
+                                <tr>
+                                    <td colspan="2" class="text-danger">Nenhuma turma ainda.</td>
                                     </tr>
-
-                                    {% empty %}
-                                    <tr>
-                                        <td colspan="2" class="text-danger">Nenhuma turma ainda.</td>
-                                    </tr>
-                                {% endfor %}
+                                    {% endfor %}
                             </tbody>
                         </table>
                     </div>
-
+                    
                     <h5 class="text-primary mt-4">Noite</h5>
                     <div class="col-10 table-responsive">
                         <table class="table table-hover">
@@ -88,13 +88,13 @@
                             </thead>
                             <tbody>
                                 {% for turma in noite %}
-                                    <tr>
-                                        <td>{{turma.nome}}</td>
-                                        <td>{{turma.turno}}</td>
-                                        <td>
-                                            <button class="btn btn-secondary btn-sm ml-2">Alterar</button>
-                                            <button class="btn btn-danger btn-sm">Excluir</button>
-                                        </td>
+                                <tr>
+                                    <td>{{turma.nome}}</td>
+                                    <td>{{turma.turno}}</td>
+                                    <td>
+                                        <button class="btn btn-secondary btn-sm ml-2"><a class="link-offset-2 link-underline link-underline-opacity-0 text-white" href="{% url 'editar-turma' turma.id %}">Editar</a></button>
+                                        <button class="btn btn-danger btn-sm"><a class="link-offset-2 link-underline link-underline-opacity-0 text-white" href="{% url 'excluir-turma' turma.id %}">Excluir</a></button>
+                                    </td>
                                     </tr>
 
                                     {% empty %}

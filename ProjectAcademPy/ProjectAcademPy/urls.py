@@ -28,6 +28,7 @@ urlpatterns = [
     path('disciplinas/', views.disciplinas_view),
     path('editar-turma/<int:id>', views.editar_turma_view, name='editar-turma'),
     path('entrar/', views.entrar_view),
+    path('excluir-turma/<int:id>', views.excluir_turma_view, name='excluir-turma'),
     path('home/', views.home_view),
     path('logout/', views.logout_view),
     path('minha-conta/', views.minha_conta_view),

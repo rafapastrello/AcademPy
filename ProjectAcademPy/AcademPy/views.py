@@ -109,12 +109,24 @@ def disciplinas_view(request):
     return render(request, 'disciplinas.html')
 
 def editar_turma_view(request, id):
-    id_turma = Turma.objects.get(id=id)
-    turma = Turma.objects.all()
-    return render(request, 'editar_turma.html', {
-        'id_turma': id_turma,
-        'turma': turma,
-    })
+    turma = Turma.objects.get(id=id)
+    if request.method == 'GET':
+        return render(request, 'editar_turma.html', {
+            'turma': turma,
+        })
+    elif request.method == 'POST':
+        if 'edita_nome_turma' in request.POST:
+            entrada_nome_turma = request.POST.get("nome_turma")
+            nome_turma = entrada_nome_turma.upper()
+            turma.nome = nome_turma
+            turma.save()
+            return HttpResponseRedirect('/turmas')
+
+        elif 'edita_turno_turma' in request.POST:
+            turno_turma = request.POST.get("turno_turma")
+            turma.turno = turno_turma
+            turma.save()
+            return HttpResponseRedirect('/turmas')
 
 def entrar_view(request):
     if request.method == 'GET':
@@ -135,6 +147,11 @@ def entrar_view(request):
             })
     else:
         return HttpResponseBadRequest()
+
+def excluir_turma_view(request, id):
+    turma = Turma.objects.get(id=id)
+    turma.delete()
+    return HttpResponseRedirect('/turmas')
 
 @login_required(login_url='/entrar')
 def home_view(request):
