@@ -17,28 +17,163 @@
 
             <h3 class="card-title mb-5">Professores cadastrados</h3>
 
-            <p>Filtrar por:</p>
+            <p>Filtrar por Disponibilidade:</p>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link active" id="nav-disponibilidade-tab" data-bs-toggle="tab" data-bs-target="#nav-disponibilidade" type="button" role="tab" aria-controls="nav-disponibilidade" aria-selected="true">Disponibilidade</button>
+                <button class="nav-link active" id="nav-geral-tab" data-bs-toggle="tab" data-bs-target="#nav-geral" type="button" role="tab" aria-controls="nav-geral" aria-selected="true">Geral</button>
 
-                <button class="nav-link" id="nav-especializacao-tab" data-bs-toggle="tab" data-bs-target="#nav-especializacao" type="button" role="tab" aria-controls="nav-especializacao" aria-selected="false">Especialização</button>
+                <button class="nav-link" id="nav-manha-tab" data-bs-toggle="tab" data-bs-target="#nav-manha" type="button" role="tab" aria-controls="nav-manha" aria-selected="false">Manhã</button>
+                
+                <button class="nav-link" id="nav-tarde-tab" data-bs-toggle="tab" data-bs-target="#nav-tarde" type="button" role="tab" aria-controls="nav-tarde" aria-selected="false">Tarde</button>
+
+                <button class="nav-link" id="nav-noite-tab" data-bs-toggle="tab" data-bs-target="#nav-noite" type="button" role="tab" aria-controls="nav-noite" aria-selected="false">Noite</button>
             </div>
 
             <div class="tab-content" id="nav-tabContent">
-
-                <div class="tab-pane fade show active" id="nav-disponibilidade" role="tabpanel" aria-labelledby="nav-disponibilidade-tab" tabindex="0">
-                    <!-- Disponibilidade -->
-                    <h3 class="mt-5 mb-3">Disponibilidade</h3>
+                <div class="tab-pane fade show active" id="nav-geral" role="tabpanel" aria-labelledby="nav-geral-tab" tabindex="0">
+                    <!-- Geral -->
+                    <h3 class="mt-5 mb-3">Geral</h3>
                     <hr>
                     
+                    <div class="col-10 table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Especialização</th>
+                                    <th scope="col">Disponibilidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for professor in professores %}
+                                    <tr>
+                                        <td>{{professor.usuario}}</td>
+                                        <td>{{professor.especializacao}}</td>
+                                        <td>
+                                            {% if professor.disponibilidade_manha%}Manhã{% endif %}
+                                            {% if professor.disponibilidade_tarde%}Tarde{% endif %}
+                                            {% if professor.disponibilidade_noite%}Noite{% endif %}
+                                        </td>
+                                    </tr>
+
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="2" class="text-danger">Nenhum(a) professor(a) ainda.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
         
-                <div class="tab-pane fade" id="nav-especializacao" role="tabpanel" aria-labelledby="nav-especializacao-tab" tabindex="1">
-                    <!-- Especialização -->
-                    <h3 class="mt-5 mb-3">Especialização</h3>
+                <div class="tab-pane fade" id="nav-manha" role="tabpanel" aria-labelledby="nav-manha-tab" tabindex="1">
+                    <!-- Manhã -->
+                    <h3 class="mt-5 mb-3">Manhã</h3>
                     <hr>
                     
+                    <div class="col-10 table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Especialização</th>
+                                    <th scope="col">Disponibilidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for professor in professores_manha %}
+                                    <tr>
+                                        <td>{{professor.usuario}}</td>
+                                        <td>{{professor.especializacao}}</td>
+                                        <td>
+                                            {% if professor.disponibilidade_manha%}Manhã{% endif %}
+                                            {% if professor.disponibilidade_tarde%}Tarde{% endif %}
+                                            {% if professor.disponibilidade_noite%}Noite{% endif %}
+                                        </td>
+                                    </tr>
+
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="2" class="text-danger">Nenhum(a) professor(a) ainda.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+        
+                <div class="tab-pane fade" id="nav-tarde" role="tabpanel" aria-labelledby="nav-tarde-tab" tabindex="1">
+                    <!-- Tarde -->
+                    <h3 class="mt-5 mb-3">Tarde</h3>
+                    <hr>
+                    
+                    <div class="col-10 table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Especialização</th>
+                                    <th scope="col">Disponibilidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for professor in professores_tarde %}
+                                    <tr>
+                                        <td>{{professor.usuario}}</td>
+                                        <td>{{professor.especializacao}}</td>
+                                        <td>
+                                            {% if professor.disponibilidade_manha%}Manhã{% endif %}
+                                            {% if professor.disponibilidade_tarde%}Tarde{% endif %}
+                                            {% if professor.disponibilidade_noite%}Noite{% endif %}
+                                        </td>
+                                    </tr>
+
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="2" class="text-danger">Nenhum(a) professor(a) ainda.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        
+                <div class="tab-pane fade" id="nav-noite" role="tabpanel" aria-labelledby="nav-noite-tab" tabindex="1">
+                    <!-- Noite -->
+                    <h3 class="mt-5 mb-3">Noite</h3>
+                    <hr>
+                    
+                    <div class="col-10 table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Especialização</th>
+                                    <th scope="col">Disponibilidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for professor in professores_noite %}
+                                    <tr>
+                                        <td>{{professor.usuario}}</td>
+                                        <td>{{professor.especializacao}}</td>
+                                        <td>
+                                            {% if professor.disponibilidade_manha%}Manhã{% endif %}
+                                            {% if professor.disponibilidade_tarde%}Tarde{% endif %}
+                                            {% if professor.disponibilidade_noite%}Noite{% endif %}
+                                        </td>
+                                    </tr>
+
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="2" class="text-danger">Nenhum(a) professor(a) ainda.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
 
         </div>

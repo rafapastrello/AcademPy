@@ -226,7 +226,16 @@ def minha_conta_view(request):
         return HttpResponseRedirect('/entrar')
 
 def professores_view(request):
-    return render(request, 'professores.html')
+    professores = Professor.objects.all()
+    professores_manha = Professor.objects.filter(disponibilidade_manha = "1")
+    professores_tarde = Professor.objects.filter(disponibilidade_tarde = "1")
+    professores_noite = Professor.objects.filter(disponibilidade_noite = "1")
+    return render(request, 'professores.html', {
+        'professores': professores,
+        'professores_manha': professores_manha,
+        'professores_tarde': professores_tarde,
+        'professores_noite': professores_noite,
+    })
 
 def redes_sociais_view(request):
     return render(request, 'redes_sociais.html')
