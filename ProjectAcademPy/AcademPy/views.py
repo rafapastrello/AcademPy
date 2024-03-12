@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Administrador, Professor, Turma
+from .models import Administrador, Professor, Turma, Disciplina
 
 def cadastro_adm_view(request):
     if request.method == 'GET':
@@ -106,7 +106,53 @@ def cronograma_view(request):
     return render(request, 'cronograma.html')
 
 def disciplinas_view(request):
-    return render(request, 'disciplinas.html')
+    disciplinas = Disciplina.objects.all()
+    if request.method == 'GET':    
+        return render(request, 'disciplinas.html', {
+            'disciplinas': disciplinas,
+            "disciplina_repetida": False,
+        })
+    elif request.method == 'POST':
+        nome_disciplina = request.POST.get("nome_disciplina")
+
+        if Turma.objects.filter(nome=nome_disciplina).exists():
+            return render(request, 'disciplinas.html', {
+            'disciplinas': disciplinas,
+            'disciplina_repetida': True,
+        })
+        else:
+            disciplina = Disciplina()
+            disciplina.nome = nome_disciplina
+            disciplina.save()
+            return render(request, 'disciplinas.html', {
+                'disciplinas': disciplinas,
+            })
+    else:
+        return HttpResponseBadRequest()
+
+def editar_disciplina_view(request, id):
+    disciplina = Turma.objects.get(id=id)
+    disciplinas = Turma.objects.all()
+    if request.method == 'GET':
+        return render(request, 'editar_disciplina.html', {
+            'disciplina': disciplina,
+            'disciplina_repetida': False,
+        })
+    elif request.method == 'POST':
+        nome_disciplina = request.POST.get("nome_disciplina")
+
+        if Disciplina.objects.filter(nome=nome_disciplina).exists():
+            return render(request, 'editar_disciplina.html', {
+                'disciplina': disciplina,
+                'disciplinas': disciplinas,
+                'turma_repetida': True,
+            })
+        else:
+            disciplina.nome = nome_disciplina
+            disciplina.save()
+            return render(request, 'editar_disciplina.html', {
+                'disciplina': disciplina,
+            })
 
 def editar_turma_view(request, id):
     turma = Turma.objects.get(id=id)
@@ -173,6 +219,11 @@ def entrar_view(request):
             })
     else:
         return HttpResponseBadRequest()
+
+def excluir_disciplina_view(request, id):
+    disciplina = Disciplina.objects.get(id=id)
+    disciplina.delete()
+    return HttpResponseRedirect('/disciplinas')
 
 def excluir_turma_view(request, id):
     turma = Turma.objects.get(id=id)
@@ -247,12 +298,12 @@ def turmas_view(request):
     noite = Turma.objects.filter(turno = "noite")
     if request.method == 'GET':    
         return render(request, 'turmas.html', {
-        'turmas': turmas,
-        'manha': manha,
-        'tarde': tarde,
-        'noite': noite,
-        "turma_repetida": False,
-    })
+            'turmas': turmas,
+            'manha': manha,
+            'tarde': tarde,
+            'noite': noite,
+            "turma_repetida": False,
+        })
     elif request.method == 'POST':
         entrada_nome_turma = request.POST.get("nome_turma")
         nome_turma = entrada_nome_turma.upper()
@@ -260,12 +311,12 @@ def turmas_view(request):
 
         if Turma.objects.filter(turno=turno_turma).filter(nome=nome_turma).exists():
             return render(request, 'turmas.html', {
-            'turmas': turmas,
-            'manha': manha,
-            'tarde': tarde,
-            'noite': noite,
-            'turma_repetida': True,
-        })
+                'turmas': turmas,
+                'manha': manha,
+                'tarde': tarde,
+                'noite': noite,
+                'turma_repetida': True,
+            })
         else:
             turma = Turma()
             turma.nome = nome_turma

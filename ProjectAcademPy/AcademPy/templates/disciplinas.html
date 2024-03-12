@@ -12,7 +12,76 @@
 {% block logado %}{% endblock logado %}
 
 {% block conteudo %}
-    <h1 class="text-white">Disciplinas cadastradas</h1>
+    <h1 class="text-white">Disciplinas</h1>
+
+    <div class="row my-5">
+        <div class="col-sm-8 mb-3 mb-sm-0">
+            <div class="card">
+                <div class="card-body">
+
+                    <h3 class="card-title mb-4">Disciplinas cadastradas</h3>
+
+                    <div class="col-10 table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nome</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for disciplina in disciplinas %}
+                                    <tr>
+                                        <td>{{disciplina.nome}}</td>
+                                        <td>{{disciplina.turno}}</td>
+                                        <td>
+                                            <button class="btn btn-secondary btn-sm ml-2"><a class="link-offset-2 link-underline link-underline-opacity-0 text-white" href="{% url 'editar-disciplina' disciplina.id %}">Editar</a></button>
+                                            <button class="btn btn-danger btn-sm"><a class="link-offset-2 link-underline link-underline-opacity-0 text-white" href="{% url 'excluir-disciplina' disciplina.id %}">Excluir</a></button>
+                                        </td>
+                                    </tr>
+
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="2" class="text-danger">Nenhuma disciplina ainda.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 mb-3 mb-sm-0">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title mb-4">Cadastrar Disciplina</h3>
+
+                    {% if disciplina_repetida %}
+                        <p class="text-danger">Esta disciplina já existe!</p>
+                    {% endif %}
+
+                    <!-- Formulário de Cadastro da Disciplina -->
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="text" class="form-control" name="nome_disciplina" id="nome_disciplina" placeholder="Nome*" required>
+                            <label for="nome_disciplina">Nome*</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
 
     
     <div class="bg-primary bg-opacity-10 rounded mb-3 p-2">
