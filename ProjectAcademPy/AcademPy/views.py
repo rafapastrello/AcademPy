@@ -140,7 +140,7 @@ def entrar_view(request):
         print(user)
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect('/minha-conta')
+            return HttpResponseRedirect('/home')
         else:
             return render(request, 'entrar.html', {
                 'incorrect_login': True
