@@ -110,23 +110,47 @@ def disciplinas_view(request):
 
 def editar_turma_view(request, id):
     turma = Turma.objects.get(id=id)
+    turmas = Turma.objects.all()
     if request.method == 'GET':
         return render(request, 'editar_turma.html', {
             'turma': turma,
+            "turma_repetida": False,
         })
     elif request.method == 'POST':
         if 'edita_nome_turma' in request.POST:
             entrada_nome_turma = request.POST.get("nome_turma")
             nome_turma = entrada_nome_turma.upper()
-            turma.nome = nome_turma
-            turma.save()
-            return HttpResponseRedirect('/turmas')
+
+            turno_turma = Turma.turno
+
+            if Turma.objects.filter(turno=turno_turma).filter(nome=nome_turma).exists():
+                return render(request, 'editar_turma.html', {
+                'turmas': turmas,
+                'turma_repetida': True,
+            })
+            else:
+                turma.nome = nome_turma
+                turma.save()
+                return render(request, 'editar_turma.html', {
+                'turma': turma,
+            })
 
         elif 'edita_turno_turma' in request.POST:
             turno_turma = request.POST.get("turno_turma")
-            turma.turno = turno_turma
-            turma.save()
-            return HttpResponseRedirect('/turmas')
+
+            nome_turma = turma.nome
+
+            if Turma.objects.filter(turno=turno_turma).filter(nome=nome_turma).exists():
+                return render(request, 'editar_turma.html', {
+                'turmas': turmas,
+                'turma_repetida': True,
+            })
+            else:
+                turma.turno = turno_turma
+                turma.save()
+                return render(request, 'editar_turma.html', {
+                'turma': turma,
+            })
 
 def entrar_view(request):
     if request.method == 'GET':
@@ -220,9 +244,8 @@ def turmas_view(request):
     })
     elif request.method == 'POST':
         entrada_nome_turma = request.POST.get("nome_turma")
-        turno_turma = request.POST.get("turno_turma")
-
         nome_turma = entrada_nome_turma.upper()
+        turno_turma = request.POST.get("turno_turma")
 
         if Turma.objects.filter(turno=turno_turma).filter(nome=nome_turma).exists():
             return render(request, 'turmas.html', {
@@ -232,16 +255,16 @@ def turmas_view(request):
             'noite': noite,
             'turma_repetida': True,
         })
-
-        turma = Turma()
-        turma.nome = nome_turma
-        turma.turno = turno_turma
-        turma.save()
-        return render(request, 'turmas.html', {
-            'turmas': turmas,
-            'manha': manha,
-            'tarde': tarde,
-            'noite': noite,
-        })
+        else:
+            turma = Turma()
+            turma.nome = nome_turma
+            turma.turno = turno_turma
+            turma.save()
+            return render(request, 'turmas.html', {
+                'turmas': turmas,
+                'manha': manha,
+                'tarde': tarde,
+                'noite': noite,
+            })
     else:
         return HttpResponseBadRequest()
