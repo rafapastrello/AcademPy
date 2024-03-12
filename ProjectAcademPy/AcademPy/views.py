@@ -121,19 +121,20 @@ def editar_turma_view(request, id):
             entrada_nome_turma = request.POST.get("nome_turma")
             nome_turma = entrada_nome_turma.upper()
 
-            turno_turma = Turma.turno
+            turno_turma = turma.turno
 
             if Turma.objects.filter(turno=turno_turma).filter(nome=nome_turma).exists():
                 return render(request, 'editar_turma.html', {
-                'turmas': turmas,
-                'turma_repetida': True,
-            })
+                    'turma': turma,
+                    'turmas': turmas,
+                    'turma_repetida': True,
+                })
             else:
                 turma.nome = nome_turma
                 turma.save()
                 return render(request, 'editar_turma.html', {
-                'turma': turma,
-            })
+                    'turma': turma,
+                })
 
         elif 'edita_turno_turma' in request.POST:
             turno_turma = request.POST.get("turno_turma")
@@ -142,6 +143,7 @@ def editar_turma_view(request, id):
 
             if Turma.objects.filter(turno=turno_turma).filter(nome=nome_turma).exists():
                 return render(request, 'editar_turma.html', {
+                'turma': turma,
                 'turmas': turmas,
                 'turma_repetida': True,
             })
