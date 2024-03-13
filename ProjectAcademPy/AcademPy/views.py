@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Administrador, Professor, Turma, Disciplina
+from .models import Administrador, Professor, Turma, Disciplina, Aula
 
 def cadastro_adm_view(request):
     if request.method == 'GET':
@@ -120,7 +120,20 @@ def criar_cronograma_view(request):
 
 @login_required(login_url='/entrar')
 def cronograma_view(request):
-    return render(request, 'cronograma.html')
+    def obter_aulas(turma, dia_semana):
+        return Aula.objects.filter(turma=turma).filter(dia_semana=dia_semana).order_by('horario')
+    
+    dias_da_semana = [
+        (
+            dia_semana, 
+            [(turma.nome, obter_aulas(turma, dia_semana)) for turma in Turma.objects.all()]
+        ) 
+        for dia_semana in range(1,8)
+    ]
+    
+    return render(request, 'cronograma.html', {
+        'dias_da_semana': dias_da_semana
+    })
 
 @login_required(login_url='/entrar')
 def disciplinas_view(request):
