@@ -100,7 +100,20 @@ def cadastro_professor_view(request):
         return HttpResponseBadRequest()
 
 def criar_cronograma_view(request):
-    return render(request, 'criar_cronograma.html')
+    disciplinas = Disciplina.objects.all()
+    professores = Professor.objects.all()
+    professores_manha = Professor.objects.filter(disponibilidade_manha = "1")
+    professores_tarde = Professor.objects.filter(disponibilidade_tarde = "1")
+    professores_noite = Professor.objects.filter(disponibilidade_noite = "1")
+    turmas = Turma.objects.all()
+    return render(request, 'criar_cronograma.html', {
+        'disciplinas': disciplinas,
+        'professores': professores,
+        'professores_manha': professores_manha,
+        'professores_tarde': professores_tarde,
+        'professores_noite': professores_noite,
+        'turmas': turmas,
+    })
 
 def cronograma_view(request):
     return render(request, 'cronograma.html')

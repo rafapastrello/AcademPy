@@ -52,58 +52,31 @@
                         
                         <div class="mb-4">
                             <select class="form-select" id="multiple-select-clear-field-disciplinas" data-placeholder="Disciplinas:" multiple required>
-                                <option value="Art">Arte</option>
-                                <option value="Bio">Biologia</option>
-                                <option value="Ed-Fís">Ed. Física</option>
-                                <option value="Esp">Espanhol</option>
-                                <option value="Fil">Filosofia</option>
-                                <option value="Fís">Física</option>
-                                <option value="Geo">Geografia</option>
-                                <option value="His">História</option>
-                                <option value="Ing">Inglês</option>
-                                <option value="Mat">Matemática</option>
-                                <option value="Por">Português</option>
-                                <option value="PV">Projeto de vida</option>
-                                <option value="Quí">Química</option>
-                                <option value="Soc">Sociologia</option>
+                                {% for disciplina in disciplinas %}
+                                    <option value="{{disciplina.nome}}">{{disciplina.nome}}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         
                         <div class="mb-4">
                             <select class="form-select" id="multiple-select-clear-field-professores" data-placeholder="Professores:" multiple required>
-                                <option value="Art">Arte</option>
-                                <option value="Bio">Biologia</option>
-                                <option value="Ed-Fís">Ed. Física</option>
-                                <option value="Esp">Espanhol</option>
-                                <option value="Fil">Filosofia</option>
-                                <option value="Fís">Física</option>
-                                <option value="Geo">Geografia</option>
-                                <option value="His">História</option>
-                                <option value="Ing">Inglês</option>
-                                <option value="Mat">Matemática</option>
-                                <option value="Por">Português</option>
-                                <option value="PV">Projeto de vida</option>
-                                <option value="Quí">Química</option>
-                                <option value="Soc">Sociologia</option>
+                                {% for professor in professores %}
+                                    <option value="{{professor.usuario}}">{{professor.usuario}} - 
+                                        {% if professor.disponibilidade_manha%}Manhã{% endif %}
+                                        {% if professor.disponibilidade_tarde%}Tarde{% endif %}
+                                        {% if professor.disponibilidade_noite%}Noite{% endif %}
+                                    </option>
+                                {% endfor %}
+
+                                
                             </select>
                         </div>
                         
                         <div class="mb-4">
                             <select class="form-select" id="multiple-select-clear-field-turmas" data-placeholder="Turmas:" multiple required>
-                                <option value="Art">Arte</option>
-                                <option value="Bio">Biologia</option>
-                                <option value="Ed-Fís">Ed. Física</option>
-                                <option value="Esp">Espanhol</option>
-                                <option value="Fil">Filosofia</option>
-                                <option value="Fís">Física</option>
-                                <option value="Geo">Geografia</option>
-                                <option value="His">História</option>
-                                <option value="Ing">Inglês</option>
-                                <option value="Mat">Matemática</option>
-                                <option value="Por">Português</option>
-                                <option value="PV">Projeto de vida</option>
-                                <option value="Quí">Química</option>
-                                <option value="Soc">Sociologia</option>
+                                {% for turma in turmas %}
+                                    <option value="{{turma.nome}}">{{turma.nome}} - {{turma.turno}}</option>
+                                {% endfor %}
                             </select>
                         </div>
 
