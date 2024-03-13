@@ -113,9 +113,10 @@ def disciplinas_view(request):
             "disciplina_repetida": False,
         })
     elif request.method == 'POST':
-        nome_disciplina = request.POST.get("nome_disciplina")
+        entrada_nome_disciplina = request.POST.get("nome_disciplina")
+        nome_disciplina = entrada_nome_disciplina.upper()
 
-        if Turma.objects.filter(nome=nome_disciplina).exists():
+        if Disciplina.objects.filter(nome=nome_disciplina).exists():
             return render(request, 'disciplinas.html', {
             'disciplinas': disciplinas,
             'disciplina_repetida': True,
@@ -131,21 +132,22 @@ def disciplinas_view(request):
         return HttpResponseBadRequest()
 
 def editar_disciplina_view(request, id):
-    disciplina = Turma.objects.get(id=id)
-    disciplinas = Turma.objects.all()
+    disciplina = Disciplina.objects.get(id=id)
+    disciplinas = Disciplina.objects.all()
     if request.method == 'GET':
         return render(request, 'editar_disciplina.html', {
             'disciplina': disciplina,
             'disciplina_repetida': False,
         })
     elif request.method == 'POST':
-        nome_disciplina = request.POST.get("nome_disciplina")
+        entrada_nome_disciplina = request.POST.get("nome_disciplina")
+        nome_disciplina = entrada_nome_disciplina.upper()
 
         if Disciplina.objects.filter(nome=nome_disciplina).exists():
             return render(request, 'editar_disciplina.html', {
                 'disciplina': disciplina,
                 'disciplinas': disciplinas,
-                'turma_repetida': True,
+                'disciplina_repetida': True,
             })
         else:
             disciplina.nome = nome_disciplina

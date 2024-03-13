@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}Editar disciplina{% endblock titulo %}
+
+{% block links_cabecalho %}
+    <li class="nav-item">
+        <a class="btn btn-outline-light border border-1 fw-light me-2" href="/disciplinas">⭠ Voltar</a>
+    </li>
+{% endblock links_cabecalho %}
+
+{% block conteudo %}
+    <h1 class="text-white">Disciplinas</h1>
+
+    <div class="row my-5">
+        <div class="col-sm-8 mb-3 mb-sm-0">
+            <div class="card">
+                <div class="card-body">
+
+                    <h3 class="card-title mb-5">Editar disciplina</h3>
+
+                    <h5 class="text-primary mb-5">{{disciplina.nome}}<h5>
+
+                    {% if disciplina_repetida %}
+                        <p class="text-danger my-4">Esta disciplina já existe!</p>
+                    {% endif %}
+
+                    <!-- Formulário de Editar Disciplina -->
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        <div class="form-group d-flex align-items-center">
+                            <label class="col-2" for="nome_disciplina">Nome:</label>
+                            <input type="text" class="col-5 form-control text-uppercase ml-3" id="nome_disciplina" name="nome_disciplina" value="{{disciplina.nome}}">
+                            <button type="submit" class="btn btn-primary btn-sm ml-2">Alterar nome da disciplina</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock conteudo %}
+
+{% block extra %}{% endblock extra %}

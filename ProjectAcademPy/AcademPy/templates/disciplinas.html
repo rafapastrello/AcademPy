@@ -61,11 +61,11 @@
                         <p class="text-danger">Esta disciplina já existe!</p>
                     {% endif %}
 
-                    <!-- Formulário de Cadastro da Disciplina -->
+                    <!-- Formulário de Cadastro de Disciplina -->
                     <form method="POST">
                         {% csrf_token %}
                         <div class="form-floating mb-3 text-dark">
-                            <input type="text" class="form-control" name="nome_disciplina" id="nome_disciplina" placeholder="Nome*" required>
+                            <input type="text" class="form-control text-uppercase" name="nome_disciplina" id="nome_disciplina" placeholder="Nome*" required>
                             <label for="nome_disciplina">Nome*</label>
                         </div>
 
@@ -74,64 +74,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-
-
-
-
-
-
-
-    
-    <div class="bg-primary bg-opacity-10 rounded mb-3 p-2">
-        <div class="d-flex justify-content-between">
-            <p>Disciplinas</p>
-
-            <input type="checkbox" class="mr-2"></input>
-        </div>
-
-        <input type="checkbox" class="btn-check" id="Art" name="Art">
-        <label class="btn" for="Art">Arte</label>
-
-        <input type="checkbox" class="btn-check" id="Bio" name="Bio">
-        <label class="btn" for="Bio">Biologia</label>
-
-        <input type="checkbox" class="btn-check" id="Ed-Fís" name="Ed-Fís">
-        <label class="btn" for="Ed-Fís">Ed. Física</label>
-
-        <input type="checkbox" class="btn-check" id="Esp" name="Esp">
-        <label class="btn" for="Esp">Espanhol</label>
-
-        <input type="checkbox" class="btn-check" id="Fil" name="Fil">
-        <label class="btn" for="Fil">Filosofia</label>
-
-        <input type="checkbox" class="btn-check" id="Fís" name="Fís">
-        <label class="btn" for="Fís">Física</label>
-
-        <input type="checkbox" class="btn-check" id="Geo" name="Geo">
-        <label class="btn" for="Geo">Geografia</label>
-
-        <input type="checkbox" class="btn-check" id="His" name="His">
-        <label class="btn" for="His">História</label>
-
-        <input type="checkbox" class="btn-check" id="Ing" name="Ing">
-        <label class="btn" for="Ing">Inglês</label>
-
-        <input type="checkbox" class="btn-check" id="Mat" name="Mat">
-        <label class="btn" for="Mat">Matemática</label>
-
-        <input type="checkbox" class="btn-check" id="Por" name="Por">
-        <label class="btn" for="Por">Português</label>
-
-        <input type="checkbox" class="btn-check" id="PV" name="PV">
-        <label class="btn" for="PV">Projeto de vida</label>
-
-        <input type="checkbox" class="btn-check" id="Quí" name="Quí">
-        <label class="btn" for="Quí">Química</label>
-
-        <input type="checkbox" class="btn-check" id="Soc" name="Soc">
-        <label class="btn" for="Soc">Sociologia</label>
     </div>
 {% endblock conteudo %}
 

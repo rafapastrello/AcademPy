@@ -7,6 +7,9 @@ class Administrador(models.Model):
 class Disciplina(models.Model):
     nome = models.CharField(max_length=100)
 
+    class Meta:
+        ordering = ['nome']
+
 class Professor(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     especializacao = models.CharField(max_length=100)
