@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block titulo %}Cronograma Gerado{% endblock titulo %}
+{% block titulo %}Editar Cronograma{% endblock titulo %}
 
 {% block links_cabecalho %}
     <li class="nav-item">
@@ -12,50 +12,9 @@
 {% block logado %}{% endblock logado %}
 
 {% block conteudo %}
-    <h1 class="text-white mb-5">Cronograma Acadêmico Gerado</h1>
+    <h1 class="text-white mb-5">Editar Cronograma Acadêmico</h1>
 
     <h5 class="text-primary mt-4">Manhã</h5>
-
-    
-    {% for dia_semana, turmas in dias_da_semana %}
-    <div class="mt-5">
-        <p class="text-white">{{dia_semana}}</p>
-
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover table-hover table-dark">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        {% for i in horarios_aulas %}
-                        <th scope="col">{{i}}ª aula</th>
-                        {% endfor %}
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for nome_turma, aulas in turmas %}
-                    <tr>
-                        <th scope="row">{{nome_turma}}</th>
-                        {% for i in horarios_aulas %}
-                            <td>
-                            {% for aula in aulas %}
-                                {% if aula.horario == i %}
-                                    <p class="text-primary p-0 m-0">{{aula.disciplina.nome}}</p>
-                                    <p class="text-white-50 small p-0 m-0">{{aula.professor.usuario.first_name}}</p>        
-                                {% endif%}
-                            {% endfor %}
-                            </td>
-                        {% endfor %}
-                    </tr>
-                    {% endfor %}
-
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-    {% endfor %}
-
-
 
     <div class="mt-5">
 

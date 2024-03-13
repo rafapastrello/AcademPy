@@ -51,7 +51,7 @@
                         </div>
                         
                         <div class="mb-4">
-                            <select class="form-select" id="multiple-select-clear-field-disciplinas" data-placeholder="Disciplinas:" multiple required>
+                            <select class="form-select" id="multiple-select-clear-field-disciplinas" data-placeholder="Disciplinas:" name="disciplinas" multiple required>
                                 {% for disciplina in disciplinas %}
                                     <option value="{{disciplina.nome}}">{{disciplina.nome}}</option>
                                 {% endfor %}
@@ -59,7 +59,7 @@
                         </div>
                         
                         <div class="mb-4">
-                            <select class="form-select" id="multiple-select-clear-field-professores" data-placeholder="Professores:" multiple required>
+                            <select class="form-select" id="multiple-select-clear-field-professores" data-placeholder="Professores:" name="professores" multiple required>
                                 {% for professor in professores %}
                                     <option value="{{professor.usuario}}">{{professor.usuario}} - 
                                         {% if professor.disponibilidade_manha%}Manhã{% endif %}
@@ -67,11 +67,9 @@
                                         {% if professor.disponibilidade_noite%}Noite{% endif %}
                                     </option>
                                 {% endfor %}
-
-                                
                             </select>
                         </div>
-                        
+
                         <div class="mb-4">
                             <select class="form-select" id="multiple-select-clear-field-turmas" data-placeholder="Turmas:" multiple required>
                                 {% for turma in turmas %}

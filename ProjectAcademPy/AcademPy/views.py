@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Administrador, Professor, Turma, Disciplina, Aula
+from .models import Administrador, Professor, Turma, Disciplina, Aula, Cronograma
 
 def cadastro_adm_view(request):
     if request.method == 'GET':
@@ -109,36 +109,49 @@ def criar_cronograma_view(request):
     professores_tarde = Professor.objects.filter(disponibilidade_tarde = "1")
     professores_noite = Professor.objects.filter(disponibilidade_noite = "1")
     turmas = Turma.objects.all()
-    return render(request, 'criar_cronograma.html', {
-        'disciplinas': disciplinas,
-        'professores': professores,
-        'professores_manha': professores_manha,
-        'professores_tarde': professores_tarde,
-        'professores_noite': professores_noite,
-        'turmas': turmas,
-    })
+    if request.method == 'GET':
+        return render(request, 'criar_cronograma.html', {
+            'disciplinas': disciplinas,
+            'professores': professores,
+            'professores_manha': professores_manha,
+            'professores_tarde': professores_tarde,
+            'professores_noite': professores_noite,
+            'turmas': turmas,
+        })
+    if request.method == 'POST':
+        turno = request.POST.get("turno")
+        dias_semana = request.POST.get("dias_semana")
+        qtd_aulas = request.POST.get("qtd_aulas")
+        disciplinas = request.POST.get("disciplinas")
+        professores = request.POST.get("professores")
+        turmas = request.POST.get("turmas")
+        
 
 @login_required(login_url='/entrar')
 def cronograma_view(request):
-    def obter_aulas(turma, dia_semana):
-        return Aula.objects.filter(turma=turma).filter(dia_semana=dia_semana).order_by('horario')
-    
+    def obter_aulas(cronograma, turma, dia_semana):
+        return Aula.objects.filter(cronograma=cronograma).filter(turma=turma).filter(dia_semana=dia_semana).order_by('horario')
+
+    cronograma = Cronograma.objects.order_by('-dt_criacao').first()
+
     dias_da_semana = [
         (
             dia_semana, 
-            [(turma.nome, obter_aulas(turma, dia_semana)) for turma in Turma.objects.all()]
+            [(turma.nome, obter_aulas(cronograma, turma, dia_semana)) for turma in Turma.objects.all()]
         ) 
         for dia_semana in range(1,8)
     ]
-    
+
     return render(request, 'cronograma.html', {
-        'dias_da_semana': dias_da_semana
+        'dias_da_semana': dias_da_semana,
+        'qtd_aulas': cronograma.qtd_aulas,
+        'horarios_aulas': list(range(1, cronograma.qtd_aulas+1)) 
     })
 
 @login_required(login_url='/entrar')
 def disciplinas_view(request):
     disciplinas = Disciplina.objects.all()
-    if request.method == 'GET':    
+    if request.method == 'GET':
         return render(request, 'disciplinas.html', {
             'disciplinas': disciplinas,
             "disciplina_repetida": False,
@@ -161,6 +174,13 @@ def disciplinas_view(request):
             })
     else:
         return HttpResponseBadRequest()
+
+@login_required(login_url='/entrar')
+def editar_cronograma_view(request):
+    if request.method == 'GET':
+        return render(request, 'editar_cronograma.html')
+    elif request.method == 'POST':
+        pass
 
 @login_required(login_url='/entrar')
 def editar_disciplina_view(request, id):
