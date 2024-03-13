@@ -101,6 +101,7 @@ def cadastro_professor_view(request):
     else:
         return HttpResponseBadRequest()
 
+@login_required(login_url='/entrar')
 def criar_cronograma_view(request):
     disciplinas = Disciplina.objects.all()
     professores = Professor.objects.all()
@@ -117,9 +118,11 @@ def criar_cronograma_view(request):
         'turmas': turmas,
     })
 
+@login_required(login_url='/entrar')
 def cronograma_view(request):
     return render(request, 'cronograma.html')
 
+@login_required(login_url='/entrar')
 def disciplinas_view(request):
     disciplinas = Disciplina.objects.all()
     if request.method == 'GET':    
@@ -146,6 +149,7 @@ def disciplinas_view(request):
     else:
         return HttpResponseBadRequest()
 
+@login_required(login_url='/entrar')
 def editar_disciplina_view(request, id):
     disciplina = Disciplina.objects.get(id=id)
     disciplinas = Disciplina.objects.all()
@@ -171,6 +175,7 @@ def editar_disciplina_view(request, id):
                 'disciplina': disciplina,
             })
 
+@login_required(login_url='/entrar')
 def editar_turma_view(request, id):
     turma = Turma.objects.get(id=id)
     turmas = Turma.objects.all()
@@ -237,11 +242,13 @@ def entrar_view(request):
     else:
         return HttpResponseBadRequest()
 
+@login_required(login_url='/entrar')
 def excluir_disciplina_view(request, id):
     disciplina = Disciplina.objects.get(id=id)
     disciplina.delete()
     return HttpResponseRedirect('/disciplinas')
 
+@login_required(login_url='/entrar')
 def excluir_turma_view(request, id):
     turma = Turma.objects.get(id=id)
     turma.delete()
@@ -295,6 +302,7 @@ def minha_conta_view(request):
         # Não é professor nem administrador
         return HttpResponseRedirect('/entrar')
 
+@login_required(login_url='/entrar')
 def professores_view(request):
     professores = Professor.objects.all()
     professores_manha = Professor.objects.filter(disponibilidade_manha = "1")
@@ -310,6 +318,7 @@ def professores_view(request):
 def redes_sociais_view(request):
     return render(request, 'redes_sociais.html')
 
+@login_required(login_url='/entrar')
 def turmas_view(request):
     turmas = Turma.objects.all()
     manha = Turma.objects.filter(turno = "manha")
