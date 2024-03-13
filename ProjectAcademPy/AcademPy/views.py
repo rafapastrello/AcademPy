@@ -48,8 +48,10 @@ def cadastro_adm_view(request):
         return HttpResponseBadRequest()
 
 def cadastro_professor_view(request):
+    disciplinas = Disciplina.objects.all()
     if request.method == 'GET':
         return render(request, 'cadastro_professor.html', {
+            'disciplinas': disciplinas,
             "email_repeated": False,
             "cod_invalido": False,
         })
@@ -281,11 +283,13 @@ def minha_conta_view(request):
     elif Professor.objects.filter(usuario=request.user).exists():
         # É professor
         professor = Professor.objects.get(usuario=request.user)
+        disciplinas = Disciplina.objects.all()
         return render(request, 'minha_conta_professor.html', {
             'username': request.user.username,
             'nome': request.user.first_name + " " + request.user.last_name,
             'email': request.user.email,
             'professor': professor,
+            'disciplinas': disciplinas,
         })
     else:
         # Não é professor nem administrador

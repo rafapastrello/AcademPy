@@ -40,20 +40,9 @@
                     <label class="col-2 text-light" for="especializacao">Especialização:</label>
                     <select class="form-select col-5 form-control ml-3" id="especializacao" name="especializacao">
                         <option selected>{{professor.especializacao}}</option>
-                        <option value="Art">Arte</option>
-                        <option value="Bio">Biologia</option>
-                        <option value="Ed-Fís">Ed. Física</option>
-                        <option value="Esp">Espanhol</option>
-                        <option value="Fil">Filosofia</option>
-                        <option value="Fís">Física</option>
-                        <option value="Geo">Geografia</option>
-                        <option value="His">História</option>
-                        <option value="Ing">Inglês</option>
-                        <option value="Mat">Matemática</option>
-                        <option value="Por">Português</option>
-                        <option value="PV">Projeto de vida</option>
-                        <option value="Quí">Química</option>
-                        <option value="Soc">Sociologia</option>
+                        {% for disciplina in disciplinas %}
+                            <option value="{{disciplina.nome}}">{{disciplina.nome}}</option>
+                        {% endfor %}
                     </select>
                     <button type="submit" class="btn btn-secondary btn-sm ml-2">Alterar Especialização</button>
                 </div>
