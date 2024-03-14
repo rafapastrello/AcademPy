@@ -173,8 +173,8 @@ def editar_cronograma_view(request):
             'disciplinas': disciplinas,
             'professores': professores,
             'dias_semana': list(range(2,7)),
-            'turmas': list(range(1,7)),
-            'horarios': list(range(1,7)),
+            'turmas': list(range(1,10)),
+            'horarios': list(range(1,5)),
         })
     elif request.method == 'POST':
         pass
@@ -288,8 +288,8 @@ def excluir_turma_view(request, id):
 def home_view(request):
     if Administrador.objects.filter(usuario=request.user).exists():
         # É administrador
-        total_professores = Professor.objects.all().count()
-        total_disciplinas = Disciplina.objects.all().count()
+        total_professores = Professor.objects.all().count()-1 # -1 porque um é @VAGA
+        total_disciplinas = Disciplina.objects.all().count()-1 # -1 porque uma é @VAGA
         total_turmas = Turma.objects.all().count()
         total_turmas_manha = Turma.objects.filter(turno='manha').count()
         total_turmas_tarde = Turma.objects.filter(turno='tarde').count()
