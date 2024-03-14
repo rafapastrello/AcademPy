@@ -20,6 +20,7 @@ class Professor(models.Model):
 class Cronograma(models.Model):
     dt_criacao = models.DateTimeField(auto_now_add=True)
     qtd_aulas = models.IntegerField()
+    turno = models.CharField(max_length=5)
 
 class Turma(models.Model):
     nome = models.CharField(max_length=100)

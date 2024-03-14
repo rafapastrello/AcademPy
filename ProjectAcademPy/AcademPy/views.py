@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect, HttpResponseBadRequest
+from django.http import HttpResponseRedirect, HttpResponseBadRequest, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Administrador, Professor, Turma, Disciplina, Aula, Cronograma
@@ -110,10 +110,11 @@ def criar_cronograma_view(request):
         })
     if request.method == 'POST':
         turno = request.POST.get("turno")
-        dias_semana = request.POST.get("dias_semana")
+        dias_semana = request.POST.getlist("dias_semana")
         qtd_aulas = request.POST.get("qtd_aulas")
-        turmas = request.POST.get("turmas")
+        turmas = request.POST.getlist("turmas")
         
+        return HttpResponse(str(dias_semana))
 
 @login_required(login_url='/entrar')
 def cronograma_view(request):
@@ -171,6 +172,9 @@ def editar_cronograma_view(request):
         return render(request, 'editar_cronograma.html', {
             'disciplinas': disciplinas,
             'professores': professores,
+            'dias_semana': list(range(2,7)),
+            'turmas': list(range(1,7)),
+            'horarios': list(range(1,7)),
         })
     elif request.method == 'POST':
         pass
