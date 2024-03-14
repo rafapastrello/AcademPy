@@ -103,27 +103,15 @@ def cadastro_professor_view(request):
 
 @login_required(login_url='/entrar')
 def criar_cronograma_view(request):
-    disciplinas = Disciplina.objects.all()
-    professores = Professor.objects.all()
-    professores_manha = Professor.objects.filter(disponibilidade_manha = "1")
-    professores_tarde = Professor.objects.filter(disponibilidade_tarde = "1")
-    professores_noite = Professor.objects.filter(disponibilidade_noite = "1")
     turmas = Turma.objects.all()
     if request.method == 'GET':
         return render(request, 'criar_cronograma.html', {
-            'disciplinas': disciplinas,
-            'professores': professores,
-            'professores_manha': professores_manha,
-            'professores_tarde': professores_tarde,
-            'professores_noite': professores_noite,
             'turmas': turmas,
         })
     if request.method == 'POST':
         turno = request.POST.get("turno")
         dias_semana = request.POST.get("dias_semana")
         qtd_aulas = request.POST.get("qtd_aulas")
-        disciplinas = request.POST.get("disciplinas")
-        professores = request.POST.get("professores")
         turmas = request.POST.get("turmas")
         
 
@@ -177,8 +165,13 @@ def disciplinas_view(request):
 
 @login_required(login_url='/entrar')
 def editar_cronograma_view(request):
+    disciplinas = Disciplina.objects.all()
+    professores = Professor.objects.all()
     if request.method == 'GET':
-        return render(request, 'editar_cronograma.html')
+        return render(request, 'editar_cronograma.html', {
+            'disciplinas': disciplinas,
+            'professores': professores,
+        })
     elif request.method == 'POST':
         pass
 
@@ -291,8 +284,20 @@ def excluir_turma_view(request, id):
 def home_view(request):
     if Administrador.objects.filter(usuario=request.user).exists():
         # É administrador
+        total_professores = Professor.objects.all().count()
+        total_disciplinas = Disciplina.objects.all().count()
+        total_turmas = Turma.objects.all().count()
+        total_turmas_manha = Turma.objects.filter(turno='manha').count()
+        total_turmas_tarde = Turma.objects.filter(turno='tarde').count()
+        total_turmas_noite = Turma.objects.filter(turno='noite').count()
         return render(request, 'home_adm.html', {
             'username': request.user.username,
+            'total_professores': total_professores,
+            'total_disciplinas': total_disciplinas,
+            'total_turmas': total_turmas,
+            'total_turmas_manha': total_turmas_manha,
+            'total_turmas_tarde': total_turmas_tarde,
+            'total_turmas_noite': total_turmas_noite,
         })
     elif Professor.objects.filter(usuario=request.user).exists():
         # É professor

@@ -37,9 +37,17 @@
             Resumo
         </div>
         <div class="card-body">
-            <p>Total de Professores: X</p>
-            <p>Total de Disciplinas: Y</p>
-            <p>Total de Turmas: Z</p>
+            <h4 class="text-primary">Professores</h4>
+            <p>Total de Professores: <span class="text-primary">{{ total_professores }}</span></p>
+
+            <h4 class="text-primary mt-4">Disciplinas</h4>
+            <p>Total de Disciplinas: <span class="text-primary">{{ total_disciplinas }}</span></p>
+
+            <h4 class="text-primary mt-4">Turmas</h4>
+            <p class="mb-3">>>> Total de Turmas: <span class="text-primary">{{ total_turmas }}</span></p>
+            <p class="m-0">Quantidade de turmas <span class="text-primary">manhã</span>: {{ total_turmas_manha }}</p>
+            <p class="m-0">Quantidade de turmas <span class="text-primary">tarde</span>: {{ total_turmas_tarde }}</p>
+            <p class="m-0">Quantidade de turmas <span class="text-primary">noite</span>: {{ total_turmas_noite }}</p>
         </div>
     </div>
 

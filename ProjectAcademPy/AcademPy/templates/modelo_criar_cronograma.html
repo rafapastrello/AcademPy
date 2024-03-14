@@ -27,9 +27,9 @@
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="turno">Turno:</label>
                             <select class="form-select" id="turno" name="turno" required>
-                                <option value="Manhã">Manhã</option>
-                                <option value="Tarde">Tarde</option>
-                                <option value="Noite">Noite</option>
+                                <option value="manha">Manhã</option>
+                                <option value="tarde">Tarde</option>
+                                <option value="noite">Noite</option>
                             </select>
                         </div>
 
@@ -48,6 +48,26 @@
                         <div class="form-floating mb-4 text-dark">
                             <input type="number" class="form-control" name="qtd_aulas" placeholder="Quantidade de aulas por dia*" required>
                             <label for="qtd_aulas">Quantidade de aulas por dia*</label>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <select class="form-select" id="multiple-select-clear-field-disciplinas" data-placeholder="Disciplinas:" name="disciplinas" multiple required>
+                                {% for disciplina in disciplinas %}
+                                    <option value="{{disciplina.nome}}">{{disciplina.nome}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <select class="form-select" id="multiple-select-clear-field-professores" data-placeholder="Professores:" name="professores" multiple required>
+                                {% for professor in professores %}
+                                    <option value="{{professor.usuario}}">{{professor.usuario}} - 
+                                        {% if professor.disponibilidade_manha%}Manhã{% endif %}
+                                        {% if professor.disponibilidade_tarde%}Tarde{% endif %}
+                                        {% if professor.disponibilidade_noite%}Noite{% endif %}
+                                    </option>
+                                {% endfor %}
+                            </select>
                         </div>
 
                         <div class="mb-4">
