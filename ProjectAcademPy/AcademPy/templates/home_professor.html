@@ -15,11 +15,64 @@
 {% block logado %}>>> Logado como: {{username}}{% endblock logado %}
 
 {% block conteudo %}
-    <h3 class="text-light">
-        HOME DO PROFESSOR
-
-        Automatização da criação de cronogramas de matérias
-    </h3>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8">
+                <h2 class="text-white">Bem-vindo(a), {{username}}!</h2>
+                <p class="text-white">Aqui está uma visão geral das suas turmas e atividades:</p>
+                <!-- Visão geral das turmas -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Suas Turmas
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            {% for turma in turmas %}
+                                <li>{{ turma.nome }} - Turno: {{ turma.turno }} - Disciplinas: {{ turma.disciplinas }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <!-- Próximas atividades -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Próximas Atividades
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            {% for atividade in proximas_atividades %}
+                                <li>{{ atividade.data }} - {{ atividade.descricao }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- Ferramentas úteis -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Ferramentas Úteis
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li><a href="#">Ver meu Cronograma de aulas</a></li>
+                            <li><a href="#">Visualizar minhas Turmas</a></li>
+                            <li><a href="#">Sistema de chamada</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Suporte -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Suporte
+                    </div>
+                    <div class="card-body">
+                        <p>Para suporte técnico, entre em contato conosco:</p>
+                        <p>E-mail: suporte@academPy.com</p>
+                        <p>Telefone: (XX) XXXX-XXXX</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock conteudo %}
-
-{% block extra %}{% endblock extra %}
