@@ -467,7 +467,6 @@ def gerar_cronograma_view(request):
     # Obtém todas as disciplinas e professores do banco de dados.
     disciplinas = Disciplina.objects.all()
     professores = Professor.objects.all()
-
     if request.method == 'GET':
         # Se a requisição for do tipo GET, renderiza a página com as informações necessárias.
         return render(request, 'gerar_cronograma.html', {
@@ -570,27 +569,41 @@ def minha_conta_view(request):
                 'username': request.user.username,
             })
         elif request.method == 'POST':
-            adms = Administrador.objects.all()
+            administradores = Administrador.objects.all()
             if 'edita_nome' in request.POST:
                 nome = request.POST.get("nome")
 
-                email = adms.usuario.email
-                first_name = adms.usuario.first_name
-                last_name = adms.usuario.last_name
-                password = adms.usuario.password
+                email = administradores.usuario.email
+                first_name = administradores.usuario.first_name
+                last_name = administradores.usuario.last_name
+                password = administradores.usuario.password
 
-                adms.first_name = nome.split(' ')[0]
-                adms.last_name = nome.split(' ')[-1]
-                adms.save()
+                administradores.first_name = nome.split(' ')[0]
+                administradores.last_name = nome.split(' ')[-1]
+                administradores.save()
 
                 return render(request, 'minha_conta_adm.html', {
                     'username': request.user.username,
                 })
-
-            else:
-                return HttpResponseRedirect('/entrar')
         else:
             return HttpResponseBadRequest()
+    elif Professor.objects.filter(usuario=request.user).exists():
+    # Se o usuário for um professor, obtém as informações da conta de professor e as disciplinas associadas.
+        if request.method == 'GET':
+            professor = Professor.objects.get(usuario=request.user)
+            disciplinas = Disciplina.objects.all()
+            return render(request, 'minha_conta_professor.html', {
+                'username': request.user.username,
+                'nome': request.user.first_name + " " + request.user.last_name,
+                'email': request.user.email,
+                'professor': professor,
+                'disciplinas': disciplinas,
+            })
+        elif request.method == 'POST':
+            pass
+    else:
+        # Se o usuário não for nem administrador nem professor, redireciona para a página de login.
+        return HttpResponseRedirect('/entrar')
 
 
 @login_required(login_url='/entrar')

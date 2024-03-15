@@ -47,7 +47,7 @@
                                 
                                 <select class="form-select bg-dark text-white-50 small p-1 m-0" name="professor_{{dia_semana}}_{{turma}}_{{horario}}">
                                     {% for professor in professores %}
-                                        <option class="small" value="{{professor.nome}}">{{professor.usuario.first_name}} {{professor.usuario.last_name}}</option>
+                                        <option class="small" value="{{professor.nome}}">{{professor.usuario.first_name}} {{professor.usuario.last_name}} - {{professor.especializacao}}</option>
                                     {% endfor %}
                                 </select>
                             </td>

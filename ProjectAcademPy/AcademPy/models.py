@@ -46,10 +46,11 @@ class Cronograma(models.Model):
     Atributos:
         dt_criacao (datetime): Data e hora de criação do cronograma.
         qtd_aulas (int): Quantidade total de aulas no cronograma.
-        turno (str): Turno das aulas no cronograma.
+        turno (str): Turno do cronograma.
     """
     dt_criacao = models.DateTimeField(auto_now_add=True)
     qtd_aulas = models.IntegerField()
+    qtd_turmas = models.IntegerField()
     turno = models.CharField(max_length=5)
 
 class Turma(models.Model):
@@ -84,5 +85,5 @@ class Aula(models.Model):
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
-    dia_semana = models.IntegerField(choices=[(1, 'Domingo'), (2, 'Segunda-Feira'), (3, 'Terça-Feira'), (4, 'Quarta-Feira'), (5, 'Quinta-Feira'), (6, 'Sexta-Feira'), (7, 'Sábado')])
+    dia_semana = models.IntegerField(choices=[(1, 'Segunda-Feira'), (2, 'Terça-Feira'), (3, 'Quarta-Feira'), (4, 'Quinta-Feira'), (5, 'Sexta-Feira')])
     horario = models.IntegerField()
