@@ -68,6 +68,7 @@ def cadastro_adm_view(request):
         # Retorna uma resposta de erro BadRequest para métodos de requisição desconhecidos.
         return HttpResponseBadRequest()
 
+
 def cadastro_professor_view(request):
     """
     Permite o cadastro de novos professores.
@@ -155,13 +156,17 @@ def criar_cronograma_view(request):
         return render(request, 'criar_cronograma.html', {
             'turmas': turmas,
         })
-    if request.method == 'POST':
+
+    elif request.method == 'POST':
         turno = request.POST.get("turno")
         dias_semana = request.POST.getlist("dias_semana")
         qtd_aulas = request.POST.get("qtd_aulas")
         turmas = request.POST.getlist("turmas")
-        
         return HttpResponse(str(dias_semana))
+
+    else:
+        return HttpResponseBadRequest()
+
 
 @login_required(login_url='/entrar')
 def cronograma_view(request):
@@ -278,6 +283,8 @@ def editar_disciplina_view(request, id):
             return render(request, 'editar_disciplina.html', {
                 'disciplina': disciplina,
             })
+    else:
+        return HttpResponseBadRequest()
 
 
 @login_required(login_url='/entrar')
@@ -351,6 +358,8 @@ def editar_turma_view(request, id):
                 return render(request, 'editar_turma.html', {
                 'turma': turma,
             })
+    else:
+        return HttpResponseBadRequest()
 
 
 def entrar_view(request):
@@ -470,6 +479,8 @@ def gerar_cronograma_view(request):
     elif request.method == 'POST':
         # Se a requisição for do tipo POST, realiza a geração do cronograma.
         pass  # A implementação da lógica de geração do cronograma será realizada aqui.
+    else:
+        return HttpResponseBadRequest()
 
 
 @login_required(login_url='/entrar')
@@ -553,25 +564,54 @@ def minha_conta_view(request):
     """
     if Administrador.objects.filter(usuario=request.user).exists():
         # Se o usuário for um administrador, obtém e renderiza as informações da conta de administrador.
-        return render(request, 'minha_conta_adm.html', {
-            'username': request.user.username,
-            'nome': request.user.first_name + " " + request.user.last_name,
-            'email': request.user.email,
-        })
-    elif Professor.objects.filter(usuario=request.user).exists():
-        # Se o usuário for um professor, obtém as informações da conta de professor e as disciplinas associadas.
-        professor = Professor.objects.get(usuario=request.user)
-        disciplinas = Disciplina.objects.all()
-        return render(request, 'minha_conta_professor.html', {
-            'username': request.user.username,
-            'nome': request.user.first_name + " " + request.user.last_name,
-            'email': request.user.email,
-            'professor': professor,
-            'disciplinas': disciplinas,
-        })
-    else:
-        # Se o usuário não for nem administrador nem professor, redireciona para a página de login.
-        return HttpResponseRedirect('/entrar')
+        if request.method == 'GET':
+            return render(request, 'minha_conta_adm.html', {
+                'username': request.user.username,
+                'nome': request.user.first_name + " " + request.user.last_name,
+                'email': request.user.email,
+            })
+        elif request.method == 'POST':
+            if 'edita_nome_turma' in request.POST:
+                entrada_nome_turma = request.POST.get("nome_turma")
+                nome_turma = entrada_nome_turma.upper()
+
+                turno_turma = turma.turno
+
+                if Turma.objects.filter(turno=turno_turma).filter(nome=nome_turma).exists():
+                    return render(request, 'editar_turma.html', {
+                        'turma': turma,
+                        'turmas': turmas,
+                        'turma_repetida': True,
+                    })
+                else:
+                    turma.nome = nome_turma
+                    turma.save()
+                    return render(request, 'editar_turma.html', {
+                        'turma': turma,
+                    })
+
+            elif 'edita_turno_turma' in request.POST:
+                turno_turma = request.POST.get("turno_turma")
+
+                nome_turma = turma.nome
+
+                if Turma.objects.filter(turno=turno_turma).filter(nome=nome_turma).exists():
+                    return render(request, 'editar_turma.html', {
+                    'turma': turma,
+                    'turmas': turmas,
+                    'turma_repetida': True,
+                })
+                else:
+                    turma.turno = turno_turma
+                    turma.save()
+                    return render(request, 'editar_turma.html', {
+                    'turma': turma,
+                })
+            
+            else:
+                return HttpResponseRedirect('/entrar')
+        else:
+            return HttpResponseBadRequest()
 
 
 @login_required(login_url='/entrar')
