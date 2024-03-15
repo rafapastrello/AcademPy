@@ -48,7 +48,7 @@ def cadastro_adm_view(request):
             return render(request, 'cadastro_adm.html', {
                 "password_invalid": True,
             })
-        
+
         # Cria o usuário no sistema.
         user = User.objects.create_user(email, email, password)
         user.first_name = nome.split(' ')[0]
@@ -303,6 +303,7 @@ def editar_turma_view(request, id):
     # Obtém a turma a ser editada pelo seu ID.
     turma = Turma.objects.get(id=id)
     # Obtém todas as turmas para exibir no formulário de edição.
+    turmas = Turma.objects.all()
     turmas = Turma.objects.all()
     if request.method == 'GET':
         # Se a requisição for do tipo GET, renderiza a página de edição de turma com o formulário preenchido.
@@ -567,47 +568,25 @@ def minha_conta_view(request):
         if request.method == 'GET':
             return render(request, 'minha_conta_adm.html', {
                 'username': request.user.username,
-                'nome': request.user.first_name + " " + request.user.last_name,
-                'email': request.user.email,
             })
         elif request.method == 'POST':
-            if 'edita_nome_turma' in request.POST:
-                entrada_nome_turma = request.POST.get("nome_turma")
-                nome_turma = entrada_nome_turma.upper()
+            adms = Administrador.objects.all()
+            if 'edita_nome' in request.POST:
+                nome = request.POST.get("nome")
 
-                turno_turma = turma.turno
+                email = adms.usuario.email
+                first_name = adms.usuario.first_name
+                last_name = adms.usuario.last_name
+                password = adms.usuario.password
 
-                if Turma.objects.filter(turno=turno_turma).filter(nome=nome_turma).exists():
-                    return render(request, 'editar_turma.html', {
-                        'turma': turma,
-                        'turmas': turmas,
-                        'turma_repetida': True,
-                    })
-                else:
-                    turma.nome = nome_turma
-                    turma.save()
-                    return render(request, 'editar_turma.html', {
-                        'turma': turma,
-                    })
+                adms.first_name = nome.split(' ')[0]
+                adms.last_name = nome.split(' ')[-1]
+                adms.save()
 
-            elif 'edita_turno_turma' in request.POST:
-                turno_turma = request.POST.get("turno_turma")
-
-                nome_turma = turma.nome
-
-                if Turma.objects.filter(turno=turno_turma).filter(nome=nome_turma).exists():
-                    return render(request, 'editar_turma.html', {
-                    'turma': turma,
-                    'turmas': turmas,
-                    'turma_repetida': True,
+                return render(request, 'minha_conta_adm.html', {
+                    'username': request.user.username,
                 })
-                else:
-                    turma.turno = turno_turma
-                    turma.save()
-                    return render(request, 'editar_turma.html', {
-                    'turma': turma,
-                })
-            
+
             else:
                 return HttpResponseRedirect('/entrar')
         else:
