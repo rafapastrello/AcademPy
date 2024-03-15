@@ -5,16 +5,56 @@ from .models import Administrador, Disciplina, Professor, Turma
 
 @admin.register(Administrador)
 class AdministradorAdmin(admin.ModelAdmin):
+    """
+    Esta classe é usada para personalizar a exibição e o comportamento do modelo Administrador no painel de administração do Django.
+
+    Attributes:
+        pass
+
+    Methods:
+        None
+    """
+
     pass
 
 @admin.register(Disciplina)
 class DisciplinaAdmin(admin.ModelAdmin):
+    """
+    Esta classe é usada para personalizar a exibição e o comportamento do modelo Disciplina no painel de administração do Django.
+
+    Attributes:
+        pass
+
+    Methods:
+        None
+    """
+
     pass
 
 @admin.register(Professor)
 class ProfessorAdmin(admin.ModelAdmin):
+    """
+    Esta classe é usada para personalizar a exibição e o comportamento do modelo Professor no painel de administração do Django.
+
+    Attributes:
+        pass
+
+    Methods:
+        None
+    """
+
     pass
 
 @admin.register(Turma)
 class TurmaAdmin(admin.ModelAdmin):
+    """
+    Esta classe é usada para personalizar a exibição e o comportamento do modelo Turma no painel de administração do Django.
+
+    Attributes:
+        list_display (list): Lista dos campos a serem exibidos na lista de turmas.
+
+    Methods:
+        None
+    """
+
     list_display = ['nome', 'turno']
