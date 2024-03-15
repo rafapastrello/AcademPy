@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponseBadRequest, HttpResponse
 from django.contrib.auth import authenticate, login, logout
@@ -446,62 +446,68 @@ def excluir_turma_view(request, id):
     return HttpResponseRedirect('/turmas')
 
 
+QTD_DIAS_SEMANA = 5
+QTD_TURMAS = 3
+QTD_HORARIOS = 4
+
 @login_required(login_url='/entrar')
 def gerar_cronograma_view(request):
-    """
-    Permite a geração de cronogramas para turmas e disciplinas específicas.
+    aulas_alocadas_por_professor = {}
 
-    Esta função permite aos usuários gerar cronogramas para turmas específicas,
-    atribuindo disciplinas e professores a dias da semana e horários específicos.
-
-    Parameters:
-        request (HttpRequest): O objeto de requisição HTTP.
-
-    Returns:
-        HttpResponse: Renderiza a página 'gerar_cronograma.html' com as disciplinas,
-        professores e opções de configuração para a geração do cronograma.
-
-    Raises:
-        None
-    """
-    # Obtém todas as disciplinas e professores do banco de dados.
     disciplinas = Disciplina.objects.all()
     professores = Professor.objects.all()
+
     if request.method == 'GET':
-        # Se a requisição for do tipo GET, renderiza a página com as informações necessárias.
         return render(request, 'gerar_cronograma.html', {
             'disciplinas': disciplinas,
             'professores': professores,
-            'dias_semana': list(range(2,7)),  # Dias da semana de segunda a sexta.
-            'turmas': list(range(1,10)),  # Números de turmas de 1 a 9.
-            'horarios': list(range(1,5)),  # Números de horários de 1 a 4.
+            'dias_semana': list(range(2,2+QTD_DIAS_SEMANA)),  # Dias da semana de segunda a sexta.
+            'turmas': list(range(1,1+QTD_TURMAS)),  # Números de turmas de 1 a 9.
+            'horarios': list(range(1,1+QTD_HORARIOS)),  # Números de horários de 1 a 4.
+            'professor_sobreposto': False,
         })
     elif request.method == 'POST':
-        # Se a requisição for do tipo POST, realiza a geração do cronograma.
-        pass  # A implementação da lógica de geração do cronograma será realizada aqui.
+        cronograma = Cronograma.objects.create()
+
+        for dia_semana in range(2, 2+QTD_DIAS_SEMANA):
+            for turma in range(1, 1+QTD_TURMAS):
+                for horario in range(1, 1+QTD_HORARIOS):
+                    disciplina_key = f"disciplina_{dia_semana}_{turma}_{horario}"
+                    professor_key = f"professor_{dia_semana}_{turma}_{horario}"
+                    disciplina_id = request.POST.get(disciplina_key)
+                    professor_id = request.POST.get(professor_key)
+
+                    if disciplina_id and professor_id:
+                        professor = Professor.objects.get(id=professor_id)
+                        disciplina = Disciplina.objects.get(id=disciplina_id)
+                        turma = Turma.objects.get(id=turma)
+                        # Cria a instância da aula no banco de dados
+                        #aula = Aula.objects.create(
+                        #    cronograma = cronograma,
+                        #    turma = turma,
+                        #    disciplina = disciplina,
+                        #    professor = professor,
+                        #    dia_semana = dia_semana,
+                        #    horario = horario
+                        #)
+
+                        if professor_id in aulas_alocadas_por_professor.keys():
+                            aulas_alocadas_por_professor[professor_id].append((dia_semana, horario))
+                        else:
+                            aulas_alocadas_por_professor[professor_id] = [(dia_semana, horario)]
+
+        sobreposicao = False
+        for professor_id, aulas_alocadas in aulas_alocadas_por_professor.items():
+            pass
+
+        return redirect('/cronograma/')
     else:
         return HttpResponseBadRequest()
 
 
 @login_required(login_url='/entrar')
 def home_view(request):
-    """
-    Redireciona os usuários para a página principal com base em seu tipo de conta (administrador ou professor).
-
-    Esta função verifica o tipo de conta do usuário (administrador ou professor) e redireciona
-    para a página inicial correspondente, exibindo informações relevantes com base no tipo de conta.
-
-    Parameters:
-        request (HttpRequest): O objeto de requisição HTTP.
-
-    Returns:
-        HttpResponse: Renderiza a página inicial correspondente com base no tipo de conta do usuário.
-
-    Raises:
-        None
-    """
     if Administrador.objects.filter(usuario=request.user).exists():
-        # Se o usuário for um administrador, obtém informações relevantes e renderiza a página 'home_adm.html'.
         total_professores = Professor.objects.all().count() - 1  # Desconta 1 porque um é '@VAGA'
         total_disciplinas = Disciplina.objects.all().count() - 1  # Desconta 1 porque uma é '@VAGA'
         total_turmas = Turma.objects.all().count()
@@ -518,12 +524,10 @@ def home_view(request):
             'total_turmas_noite': total_turmas_noite,
         })
     elif Professor.objects.filter(usuario=request.user).exists():
-        # Se o usuário for um professor, renderiza a página 'home_professor.html'.
         return render(request, 'home_professor.html', {
             'username': request.user.username,
         })
     else:
-        # Se o usuário não for nem professor nem administrador, redireciona para a página de login.
         return HttpResponseRedirect('/entrar')
 
 

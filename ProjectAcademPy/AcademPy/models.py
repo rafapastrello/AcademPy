@@ -49,9 +49,7 @@ class Cronograma(models.Model):
         turno (str): Turno do cronograma.
     """
     dt_criacao = models.DateTimeField(auto_now_add=True)
-    qtd_aulas = models.IntegerField()
-    qtd_turmas = models.IntegerField()
-    turno = models.CharField(max_length=5)
+    #turno = models.CharField(max_length=5)
 
 class Turma(models.Model):
     """

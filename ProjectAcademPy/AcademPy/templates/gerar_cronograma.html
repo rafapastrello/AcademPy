@@ -14,7 +14,11 @@
 {% block conteudo %}
     <h1 class="text-white mb-5">Gerar Cronograma Acadêmico</h1>
 
-    <!-- Formulário de gerar Cronogramas -->
+    {% if professor_sobreposto %}
+        <p class="text-danger">Professor sobreposto em duas turmas no mesmo horário!</p>
+    {% endif %}
+
+    <!-- Formulário para gerar Cronograma -->
     <form method="POST">
     {% csrf_token %}
 
@@ -41,13 +45,13 @@
                             <td>
                                 <select class="form-select bg-dark text-primary p-1 m-0 mb-1" name="disciplina_{{dia_semana}}_{{turma}}_{{horario}}">
                                     {% for disciplina in disciplinas %}
-                                        <option class="small" value="{{disciplina.nome}}">{{disciplina.nome}}</option>
+                                        <option class="small" value="{{disciplina.id}}">{{disciplina.nome}}</option>
                                     {% endfor %}
                                 </select>
                                 
                                 <select class="form-select bg-dark text-white-50 small p-1 m-0" name="professor_{{dia_semana}}_{{turma}}_{{horario}}">
                                     {% for professor in professores %}
-                                        <option class="small" value="{{professor.nome}}">{{professor.usuario.first_name}} {{professor.usuario.last_name}} - {{professor.especializacao}}</option>
+                                        <option class="small" value="{{professor.id}}">{{professor.usuario.first_name}} {{professor.usuario.last_name}} - {{professor.especializacao}}</option>
                                     {% endfor %}
                                 </select>
                             </td>
