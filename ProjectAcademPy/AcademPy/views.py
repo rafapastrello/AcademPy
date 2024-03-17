@@ -170,9 +170,6 @@ def criar_cronograma_view(request):
 
 @login_required(login_url='/entrar')
 def cronograma_view(request):
-    """
-    Permite visualizar o cronograma das turmas.
-    """
     def obter_aulas(cronograma, turma, dia_semana):
         return Aula.objects.filter(cronograma=cronograma).filter(turma=turma).filter(dia_semana=dia_semana).order_by('horario')
 
