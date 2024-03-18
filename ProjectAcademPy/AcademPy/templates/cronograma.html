@@ -14,9 +14,47 @@
 {% block conteudo %}
     <h1 class="text-white mb-5">Cronograma Acadêmico Gerado</h1>
 
-    <h5 class="text-primary mt-4">Manhã</h5>
+    {% for dia_semana in dias_semana %}
+        <div class="mt-5">
 
-    
+            <p class="text-white">{{dia_semana}}ª feira</p>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-hover table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            {% for horario in horarios %}
+                            <th scope="col">{{horario}}ª aula</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for turma in turmas %}
+                        <tr>
+                            <th scope="row">{{turma}}ª turma</th>
+                            {% for horario in horarios  %}
+                            <td>
+                                {% for  in  %}
+                                    <p class="text-primary p-0 m-0">Disciplina</p>
+                                {% endfor %}
+                                {% for  in  %}
+                                    <P class="text-white-50 small p-0 m-0" name="professor_{{dia_semana}}_{{turma}}_{{horario}}">Professor</p>
+                                {% endfor %}
+                            </td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+
+
+
+
+
     {% for dia_semana, turmas in dias_da_semana %}
     <div class="mt-5">
         <p class="text-white">{{dia_semana}}</p>
@@ -54,382 +92,6 @@
 
     </div>
     {% endfor %}
-
-
-
-    <div class="mt-5">
-
-        <p class="text-white">Terça-Feira</p>
-
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover table-hover table-dark">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">1° turma</th>
-                        <th scope="col">2° turma</th>
-                        <th scope="col">3° turma</th>
-                        <th scope="col">4° turma</th>
-                        <th scope="col">5° turma</th>
-                        <th scope="col">6° turma</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1° aula</th>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2° aula</th>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3° aula</th>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4° aula</th>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">5° aula</th>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">6° aula</th>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-
-
-
-    <div class="mt-5">
-
-        <p class="text-white">Quarta-Feira</p>
-
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover table-hover table-dark">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">1° turma</th>
-                        <th scope="col">2° turma</th>
-                        <th scope="col">3° turma</th>
-                        <th scope="col">4° turma</th>
-                        <th scope="col">5° turma</th>
-                        <th scope="col">6° turma</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1° aula</th>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2° aula</th>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3° aula</th>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4° aula</th>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">5° aula</th>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">6° aula</th>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                        <td>
-                            <p class="text-primary p-0 m-0">Disciplina</p>
-                            <P class="text-white-50 small p-0 m-0">Professor</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
 
 {% endblock conteudo %}
 

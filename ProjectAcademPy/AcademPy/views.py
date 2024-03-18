@@ -170,6 +170,9 @@ def criar_cronograma_view(request):
 
 @login_required(login_url='/entrar')
 def cronograma_view(request):
+    disciplinas = Disciplina.objects.all()
+    professores = Professor.objects.all()
+
     def obter_aulas(cronograma, turma, dia_semana):
         return Aula.objects.filter(cronograma=cronograma).filter(turma=turma).filter(dia_semana=dia_semana).order_by('horario')
 
@@ -185,8 +188,12 @@ def cronograma_view(request):
 
     return render(request, 'cronograma.html', {
         'dias_da_semana': dias_da_semana,
-        'qtd_aulas': cronograma.qtd_aulas,
-        'horarios_aulas': list(range(1, cronograma.qtd_aulas+1)) 
+        'disciplinas': disciplinas,
+        'professores': professores,
+        'dias_semana': list(range(2,2+QTD_DIAS_SEMANA)),  # Dias da semana de segunda a sexta.
+        'turmas': list(range(1,1+QTD_TURMAS)),  # Números de turmas de 1 a 3.
+        'horarios': list(range(1,1+QTD_HORARIOS)),  # Números de horários de 1 a 4.
+        'professor_sobreposto': False,
     })
 
 @login_required(login_url='/entrar')
@@ -443,9 +450,10 @@ def excluir_turma_view(request, id):
     return HttpResponseRedirect('/turmas')
 
 
-QTD_DIAS_SEMANA = 5
+QTD_DIAS_SEMANA = 1
 QTD_TURMAS = 3
 QTD_HORARIOS = 4
+
 
 @login_required(login_url='/entrar')
 def gerar_cronograma_view(request):
@@ -459,12 +467,12 @@ def gerar_cronograma_view(request):
             'disciplinas': disciplinas,
             'professores': professores,
             'dias_semana': list(range(2,2+QTD_DIAS_SEMANA)),  # Dias da semana de segunda a sexta.
-            'turmas': list(range(1,1+QTD_TURMAS)),  # Números de turmas de 1 a 9.
+            'turmas': list(range(1,1+QTD_TURMAS)),  # Números de turmas de 1 a 3.
             'horarios': list(range(1,1+QTD_HORARIOS)),  # Números de horários de 1 a 4.
             'professor_sobreposto': False,
         })
     elif request.method == 'POST':
-        cronograma = Cronograma.objects.create()
+        cronograma = Cronograma.objects.create() # Cria um objeto Cronograma
 
         for dia_semana in range(2, 2+QTD_DIAS_SEMANA):
             for turma in range(1, 1+QTD_TURMAS):
@@ -474,9 +482,10 @@ def gerar_cronograma_view(request):
                     disciplina_id = request.POST.get(disciplina_key)
                     professor_id = request.POST.get(professor_key)
 
-                    if disciplina_id and professor_id:
-                        professor = Professor.objects.get(id=professor_id)
+                    # Associa aulas a professores em determinados dias da semana e horários
+                    if disciplina_id and professor_id: # Se as variáveis possuem algum conteúdo
                         disciplina = Disciplina.objects.get(id=disciplina_id)
+                        professor = Professor.objects.get(id=professor_id)
                         turma = Turma.objects.get(id=turma)
                         # Cria a instância da aula no banco de dados
                         #aula = Aula.objects.create(
@@ -488,9 +497,11 @@ def gerar_cronograma_view(request):
                         #    horario = horario
                         #)
 
-                        if professor_id in aulas_alocadas_por_professor.keys():
+                        if professor_id in aulas_alocadas_por_professor.keys(): # Verifica se o professor_id já existe no dicionário
+                            # Se sim, adiciona uma tupla do dia da semana e horário à lista de aulas alocadas para aquele professor
                             aulas_alocadas_por_professor[professor_id].append((dia_semana, horario))
                         else:
+                            # Se não, cria uma nova entrada no dicionário para o professor_id com uma lista contendo uma tupla do dia da semana e horário
                             aulas_alocadas_por_professor[professor_id] = [(dia_semana, horario)]
 
         sobreposicao = False

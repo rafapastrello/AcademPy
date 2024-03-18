@@ -24,7 +24,6 @@ class Cronograma(models.Model):
 class Turma(models.Model):
     nome = models.CharField(max_length=100)
     turno = models.CharField(max_length=5)
-    qtd_aulas = models.IntegerField(default=6)
 
     class Meta:
         ordering = ['nome']

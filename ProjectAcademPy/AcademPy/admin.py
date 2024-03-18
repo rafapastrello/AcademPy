@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Administrador, Disciplina, Professor, Turma
+from .models import Administrador, Disciplina, Professor, Turma, Cronograma, Aula
 
 # Register your models here.
 
@@ -58,3 +58,11 @@ class TurmaAdmin(admin.ModelAdmin):
     """
 
     list_display = ['nome', 'turno']
+
+@admin.register(Cronograma)
+class CronogramaAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Aula)
+class AulaAdmin(admin.ModelAdmin):
+    pass
