@@ -457,7 +457,6 @@ QTD_HORARIOS = 4
 
 @login_required(login_url='/entrar')
 def gerar_cronograma_view(request):
-<<<<<<< HEAD
     def valida_cronograma():
         aulas_alocadas_por_professor = {}
         # --- Preenchimento do dicionário 'aulas_alocadas_por_professor' ---
@@ -494,9 +493,6 @@ def gerar_cronograma_view(request):
                         aulas_alocadas_por_professor[professor_id].append(aula_alocada)
                     else:
                         aulas_alocadas_por_professor[professor_id] = [aula_alocada]
-=======
-    aulas_alocadas_por_professor = {}
->>>>>>> parent of 416596e (update)
 
     disciplinas = Disciplina.objects.all()
     professores = Professor.objects.all()
@@ -511,7 +507,6 @@ def gerar_cronograma_view(request):
             'professor_sobreposto': False,
         })
     elif request.method == 'POST':
-<<<<<<< HEAD
         # --- Validação ---
         if valida_cronograma():
             # Se houver conflitos, exibe na tela os conflitos encontrados
@@ -539,23 +534,9 @@ def gerar_cronograma_view(request):
 
                         disciplina_id = int(disciplina_id_str)
                         professor_id = int(professor_id_str)
-=======
-        cronograma = Cronograma.objects.create() # Cria um objeto Cronograma
 
-        for dia_semana in range(2, 2+QTD_DIAS_SEMANA):
-            for turma in range(1, 1+QTD_TURMAS):
-                for horario in range(1, 1+QTD_HORARIOS):
-                    disciplina_key = f"disciplina_{dia_semana}_{turma}_{horario}"
-                    professor_key = f"professor_{dia_semana}_{turma}_{horario}"
-                    disciplina_id = request.POST.get(disciplina_key)
-                    professor_id = request.POST.get(professor_key)
->>>>>>> parent of 416596e (update)
-
-                    # Associa aulas a professores em determinados dias da semana e horários
-                    if disciplina_id and professor_id: # Se as variáveis possuem algum conteúdo
                         disciplina = Disciplina.objects.get(id=disciplina_id)
                         professor = Professor.objects.get(id=professor_id)
-<<<<<<< HEAD
 
                         # Cria a instância da aula no banco de dados
                         Aula.objects.create(
@@ -568,31 +549,7 @@ def gerar_cronograma_view(request):
                         )
 
             return redirect('/cronograma/')
-=======
-                        turma = Turma.objects.get(id=turma)
-                        # Cria a instância da aula no banco de dados
-                        #aula = Aula.objects.create(
-                        #    cronograma = cronograma,
-                        #    turma = turma,
-                        #    disciplina = disciplina,
-                        #    professor = professor,
-                        #    dia_semana = dia_semana,
-                        #    horario = horario
-                        #)
 
-                        if professor_id in aulas_alocadas_por_professor.keys(): # Verifica se o professor_id já existe no dicionário
-                            # Se sim, adiciona uma tupla do dia da semana e horário à lista de aulas alocadas para aquele professor
-                            aulas_alocadas_por_professor[professor_id].append((dia_semana, horario))
-                        else:
-                            # Se não, cria uma nova entrada no dicionário para o professor_id com uma lista contendo uma tupla do dia da semana e horário
-                            aulas_alocadas_por_professor[professor_id] = [(dia_semana, horario)]
->>>>>>> parent of 416596e (update)
-
-        sobreposicao = False
-        for professor_id, aulas_alocadas in aulas_alocadas_por_professor.items():
-            pass
-
-        return redirect('/cronograma/')
     else:
         return HttpResponseBadRequest()
 
