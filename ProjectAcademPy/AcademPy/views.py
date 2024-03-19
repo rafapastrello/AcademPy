@@ -459,16 +459,16 @@ QTD_HORARIOS = 4
 def gerar_cronograma_view(request):
     def valida_cronograma():
         aulas_alocadas_por_professor = {}
-        # --- Preenchimento do dicionário ---
+        # --- Preenchimento do dicionário 'aulas_alocadas_por_professor' ---
         for dia_semana in range(2, 2 + QTD_DIAS_SEMANA):
             for turma in range(1, 1 + QTD_TURMAS):
                 for horario in range(1, 1 + QTD_HORARIOS):
-                    disciplina_key = f"disciplina_{dia_semana}_{turma}_{horario}"
-                    professor_key = f"professor_{dia_semana}_{turma}_{horario}"
+                    disciplina_key = f'disciplina_{dia_semana}_{turma}_{horario}'
+                    professor_key = f'professor_{dia_semana}_{turma}_{horario}'
                     disciplina_id_str = request.POST.get(disciplina_key)
                     professor_id_str = request.POST.get(professor_key)
 
-                    if not disciplina_id_str or not professor_id_str:  # Verifica se os campos estão vazios
+                    if not disciplina_id_str or not professor_id_str:  # Verifica se os campos do form estão vazios
                         continue
 
                     # Convertendo para int apenas se os campos não estão vazios
