@@ -471,21 +471,28 @@ def gerar_cronograma_view(request):
                     if not disciplina_id_str or not professor_id_str:  # Verifica se os campos do form estão vazios
                         continue
 
-                    # Convertendo para int apenas se os campos não estão vazios
                     disciplina_id = int(disciplina_id_str)
                     professor_id = int(professor_id_str)
 
-                    # As próximas linhas de código só são executadas caso a aula não seja vaga
+                    # As próximas linhas de código só são executadas caso a aula não seja vazia
                     aula_alocada = (dia_semana, horario)
                     if professor_id in aulas_alocadas_por_professor.keys(): # Verifica se o professor_id já existe no dicionário
                         for aula in aulas_alocadas_por_professor[professor_id]:
                             if aula[0] == dia_semana and aula[1] == horario:
-                                return True  # Retorna True se houver um conflito
+                                # Se houver conflito:
+                                conflitos = [] 
+                                for professor_id in aulas_alocadas_por_professor.keys():
+                                    aulas = aulas_alocadas_por_professor[professor_id]
+                                    for aula in aulas:
+                                        if aulas.count(aula) > 1:
+                                            conflitos.append({'professor_id': professor_id, 'dia_semana': aula[0], 'horario': aula[1]})
+
+                                return conflitos
+                            else:
+                                return False # Retorna False se não houver conflitos
                         aulas_alocadas_por_professor[professor_id].append(aula_alocada)
                     else:
                         aulas_alocadas_por_professor[professor_id] = [aula_alocada]
-
-        return False  # Retorna False se não houver conflitos
 
     disciplinas = Disciplina.objects.all()
     professores = Professor.objects.all()
@@ -511,37 +518,37 @@ def gerar_cronograma_view(request):
                 'horarios': list(range(1, 1 + QTD_HORARIOS)),  # Números de horários de 1 a 4.
                 'professor_sobreposto': True,
             })
+        else:
+            # Se não houver conflitos, cadastra o cronograma e redireciona para a página de cronograma gerado
+            cronograma = Cronograma.objects.create()  # Cria um objeto Cronograma vazio
+            for dia_semana in range(2, 2 + QTD_DIAS_SEMANA):
+                for turma in range(1, 1 + QTD_TURMAS):
+                    for horario in range(1, 1 + QTD_HORARIOS):
+                        disciplina_key = f"disciplina_{dia_semana}_{turma}_{horario}"
+                        professor_key = f"professor_{dia_semana}_{turma}_{horario}"
+                        disciplina_id_str = request.POST.get(disciplina_key)
+                        professor_id_str = request.POST.get(professor_key)
 
-        # Se não houver conflitos, cadastra o cronograma e redireciona para a página de cronograma gerado
-        cronograma = Cronograma.objects.create()  # Cria um objeto Cronograma vazio
-        for dia_semana in range(2, 2 + QTD_DIAS_SEMANA):
-            for turma in range(1, 1 + QTD_TURMAS):
-                for horario in range(1, 1 + QTD_HORARIOS):
-                    disciplina_key = f"disciplina_{dia_semana}_{turma}_{horario}"
-                    professor_key = f"professor_{dia_semana}_{turma}_{horario}"
-                    disciplina_id_str = request.POST.get(disciplina_key)
-                    professor_id_str = request.POST.get(professor_key)
+                        if not disciplina_id_str or not professor_id_str:
+                            continue
 
-                    if not disciplina_id_str or not professor_id_str:
-                        continue
+                        disciplina_id = int(disciplina_id_str)
+                        professor_id = int(professor_id_str)
 
-                    disciplina_id = int(disciplina_id_str)
-                    professor_id = int(professor_id_str)
+                        disciplina = Disciplina.objects.get(id=disciplina_id)
+                        professor = Professor.objects.get(id=professor_id)
 
-                    disciplina = Disciplina.objects.get(id=disciplina_id)
-                    professor = Professor.objects.get(id=professor_id)
+                        # Cria a instância da aula no banco de dados
+                        Aula.objects.create(
+                            cronograma=cronograma,
+                            turma=turma,
+                            disciplina=disciplina,
+                            professor=professor,
+                            dia_semana=dia_semana,
+                            horario=horario
+                        )
 
-                    # Cria a instância da aula no banco de dados
-                    Aula.objects.create(
-                        cronograma=cronograma,
-                        turma=turma,
-                        disciplina=disciplina,
-                        professor=professor,
-                        dia_semana=dia_semana,
-                        horario=horario
-                    )
-
-        return redirect('/cronograma/')
+            return redirect('/cronograma/')
 
     else:
         return HttpResponseBadRequest()
