@@ -460,27 +460,26 @@ def gerar_cronograma_view(request):
     def valida_cronograma():
         aulas_alocadas_por_professor = {}
         # --- Preenchimento do dicionário ---
-        for dia_semana in range(2, 2+QTD_DIAS_SEMANA):
-            for turma in range(1, 1+QTD_TURMAS):
-                for horario in range(1, 1+QTD_HORARIOS):
-                    disciplina_key = f"disciplina_{dia_semana}_{turma}_{horario}"
-                    professor_key = f"professor_{dia_semana}_{turma}_{horario}"
+        for dia_semana in range(2, 2 + QTD_DIAS_SEMANA):
+            for turma in range(1, 1 + QTD_TURMAS):
+                for horario in range(1, 1 + QTD_HORARIOS):
+                    disciplina_key = f'disciplina_{dia_semana}_{turma}_{horario}'
+                    professor_key = f'professor_{dia_semana}_{turma}_{horario}'
                     disciplina_id = int(request.POST.get(disciplina_key))
                     professor_id = int(request.POST.get(professor_key))
 
-                    if disciplina_id == -1 or professor_id == -1:  # Aula vaga
+                    if disciplina_id == -1 or professor_id == -1:  # Aula vazia
                         continue
-                    
-                    # As próximas linhas de código só são executadas caso a aula não seja vaga
-                    turma = Turma.objects.get(id=turma)
+
+                    # As próximas linhas de código só são executadas caso a aula não seja vazia
                     aula_alocada = (dia_semana, horario)
-                    if professor_id in aulas_alocadas_por_professor.keys(): # Verifica se o professor_id já existe no dicionário
+                    if professor_id in aulas_alocadas_por_professor.keys():  # Verifica se o professor_id já existe no dicionário
                         aulas_alocadas_por_professor[professor_id].append(aula_alocada)
                     else:
                         # Se não, cria uma nova entrada no dicionário para o professor_id com uma lista contendo uma tupla do dia da semana e horário
-                        aulas_alocadas_por_professor[professor_id] = [aula_alocada]
+                        aulas_alocadas_por_professor[professor_id] = [(aula_alocada)]
 
-        # --- validação do dicionário ---
+        # --- Validação do dicionário ---
         conflitos = [] 
         for professor_id in aulas_alocadas_por_professor.keys():
             aulas = aulas_alocadas_por_professor[professor_id]
@@ -520,7 +519,6 @@ def gerar_cronograma_view(request):
 
                         disciplina = Disciplina.objects.get(id=disciplina_id)
                         professor = Professor.objects.get(id=professor_id)
-                        turma = Turma.objects.get(id=turma)
 
                         # Cria a instância da aula no banco de dados
                         Aula.objects.create(

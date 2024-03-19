@@ -16,7 +16,7 @@
         <a class="nav-link" href="/professores">Professores</a>
     </li>
     <li class="nav-item">
-        <a class="btn btn-outline-light me-2" href="/criar-cronograma">Criar Cronograma</a>
+        <a class="btn btn-outline-light me-2" href="/gerar-cronograma">Criar Cronograma</a>
     </li>
     <li class="nav-item">
         <a class="btn btn-light me-2" href="/home">Home</a>
@@ -61,10 +61,19 @@
                     <button class="btn btn-secondary btn-sm ml-2" name="edita_nome">Editar email</button>
                 </div>
 
-                <div class="form-group d-flex align-items-center">
-                    <label class="col-2 text-light" for="password">Senha:</label>
-                    <input type="text" class="col-5 form-control ml-3" id="password" name="password" value="******">
-                    <button class="btn btn-secondary btn-sm ml-2" name="edita_nome">Editar senha</button>
+                <div class="mt-5">
+                    <div class="form-group d-flex align-items-center">
+                        <label class="col-2 text-light" for="password">Senha:</label>
+                        <input type="password" class="col-5 form-control ml-3" id="password" name="password" placeholder="Editar senha" required>
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        
+                        <label class="col-2 text-light"></label>
+
+                        <input type="password" class="col-5 form-control ml-3" id="conf_password" name="conf_password" placeholder="Confirmar senha" required>
+
+                        <button class="btn btn-secondary btn-sm ml-2" name="edita_nome">Editar senha</button>
+                    </div>
                 </div>
 
                 <div class="form-group d-flex align-items-center mt-5">

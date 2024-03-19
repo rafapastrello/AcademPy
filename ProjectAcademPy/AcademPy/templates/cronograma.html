@@ -35,12 +35,8 @@
                             <th scope="row">{{turma}}ª turma</th>
                             {% for horario in horarios  %}
                             <td>
-                                {% for  in  %}
-                                    <p class="text-primary p-0 m-0">Disciplina</p>
-                                {% endfor %}
-                                {% for  in  %}
-                                    <P class="text-white-50 small p-0 m-0" name="professor_{{dia_semana}}_{{turma}}_{{horario}}">Professor</p>
-                                {% endfor %}
+                                <p class="text-primary p-0 m-0" name="disciplina_{{dia_semana}}_{{turma}}_{{horario}}">Disciplina</p>
+                                <P class="text-white-50 small p-0 m-0" name="professor_{{dia_semana}}_{{turma}}_{{horario}}">Professor</p>
                             </td>
                             {% endfor %}
                         </tr>
