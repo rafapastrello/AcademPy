@@ -15,6 +15,7 @@
     <h1 class="text-white mb-5">Gerar Cronograma Acadêmico</h1>
 
     {% if professor_sobreposto %}
+<<<<<<< HEAD
         <p class="text-danger">Professor(a) está alocado(a) em mais de uma turma no mesmo horário!</p>
         {% if conflitos %}
             <div class="alert alert-danger" role="alert">
@@ -26,6 +27,9 @@
                 </ul>
             </div>
         {% endif %}
+=======
+        <p class="text-danger">Professor em mais de uma turma no mesmo horário!</p>
+>>>>>>> parent of 416596e (update)
     {% endif %}
 
     <!-- Formulário para gerar Cronograma -->
@@ -41,9 +45,27 @@
                     <table class="table table-bordered table-hover table-hover table-dark">
                         <thead>
                             <tr>
+<<<<<<< HEAD
                                 <th scope="col"></th>
                                 {% for horario in horarios %}
                                     <th scope="col">{{horario}}ª aula</th>
+=======
+                                <th scope="row">{{turma}}ª turma</th>
+                                {% for horario in horarios  %}
+                                    <td>
+                                        <select class="form-select bg-dark text-primary p-1 m-0 mb-1" name="disciplina_{{dia_semana}}_{{turma}}_{{horario}}">
+                                            {% for disciplina in disciplinas %}
+                                                <option class="small" value="{{disciplina.id}}">{{disciplina.nome}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        
+                                        <select class="form-select bg-dark text-white-50 small p-1 m-0" name="professor_{{dia_semana}}_{{turma}}_{{horario}}">
+                                            {% for professor in professores %}
+                                                <option class="small" value="{{professor.id}}">{{professor.usuario.first_name}} {{professor.usuario.last_name}} - {{professor.especializacao}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+>>>>>>> parent of 416596e (update)
                                 {% endfor %}
                             </tr>
                         </thead>
