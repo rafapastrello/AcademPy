@@ -15,7 +15,18 @@
     <h1 class="text-white mb-5">Gerar Cronograma Acadêmico</h1>
 
     {% if professor_sobreposto %}
-        <p class="text-danger">Professor(a) {{nome_professor_sobreposto}} em mais de uma turma no mesmo horário!</p>
+        <p class="text-danger">Professor(a) está alocado(a) em mais de uma turma no mesmo horário!</p>
+        {% if conflitos %}
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Conflitos encontrados:</h4>
+                <ul>
+                    {% for conflito in conflitos %}
+                        <li>Professor: {{ conflito.professor_first_name }} {{ conflito.professor_last_name }}, Turma: {{ conflito.dia_semana }}ª feira, Horário: {{ conflito.horario }}ª aula</li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        {% endif %}
     {% endif %}
 
     <!-- Formulário para gerar Cronograma -->
