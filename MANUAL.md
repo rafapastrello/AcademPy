@@ -1,18 +1,10 @@
-# Instruções de uso
+# Manual do Usuário
 
-Claro! Vamos criar um manual para usuários do seu projeto Django. Aqui está uma versão simplificada:
-
----
-
-# Manual do Usuário - Projeto Django
-
-## Introdução
-
-Bem-vindo ao Manual do Usuário do nosso projeto Django! Este manual oferece uma visão geral das principais funcionalidades do sistema e instruções sobre como utilizá-las.
+<br/><br/>
 
 ## Acesso ao Sistema
 
-Para acessar o sistema, vá para a página de login em [link de login]. Se você não possui uma conta, entre em contato com o administrador do sistema para obter credenciais de acesso.
+Para acessar o sistema, vá para a página de login em '/entrar'. Se você não possui uma conta, entre em contato com o administrador do sistema para obter credenciais de acesso.
 
 ## Funções de Usuário
 
@@ -65,6 +57,6 @@ Para acessar o sistema, vá para a página de login em [link de login]. Se você
 
 ## Suporte
 
-Para obter assistência adicional ou relatar problemas técnicos, entre em contato com o suporte técnico em [email de suporte].
+Para obter assistência adicional ou relatar problemas técnicos, entre em contato com a autora raf.llosilva@gmail.com
 
 ---
