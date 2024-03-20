@@ -13,7 +13,8 @@
 <img src="img/logo.png" width="150px">
 
 <!-- Substitua o seguinte parágrafo por um resumo do seu projeto: -->
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+AcademPy é um sistema de gerenciamento acadêmico desenvolvido com Django e estilizado com Bootstrap. Seu principal objetivo é automatizar a criação de cronogramas acadêmicos. O sistema permite o cadastro e gestão de administradores, professores, turmas, disciplinas e cronogramas acadêmicos. Com o AcademPy, é possível organizar o cronograma das aulas de forma eficiente, atribuindo disciplinas aos professores em diferentes turmas e horários.
 
 ## Documentação
 
