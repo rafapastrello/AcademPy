@@ -457,38 +457,6 @@ QTD_HORARIOS = 4
 
 @login_required(login_url='/entrar')
 def gerar_cronograma_view(request):
-    def valida_cronograma():
-        aulas_alocadas_por_professor = {}
-        # --- Preenchimento do dicionário ---
-        for dia_semana in range(2, 2 + QTD_DIAS_SEMANA):
-            for turma in range(1, 1 + QTD_TURMAS):
-                for horario in range(1, 1 + QTD_HORARIOS):
-                    disciplina_key = f'disciplina_{dia_semana}_{turma}_{horario}'
-                    professor_key = f'professor_{dia_semana}_{turma}_{horario}'
-                    disciplina_id = int(request.POST.get(disciplina_key))
-                    professor_id = int(request.POST.get(professor_key))
-
-                    if disciplina_id == -1 or professor_id == -1:  # Aula vazia
-                        continue
-
-                    # As próximas linhas de código só são executadas caso a aula não seja vazia
-                    aula_alocada = (dia_semana, horario)
-                    if professor_id in aulas_alocadas_por_professor.keys():  # Verifica se o professor_id já existe no dicionário
-                        aulas_alocadas_por_professor[professor_id].append(aula_alocada)
-                    else:
-                        # Se não, cria uma nova entrada no dicionário para o professor_id com uma lista contendo uma tupla do dia da semana e horário
-                        aulas_alocadas_por_professor[professor_id] = [(aula_alocada)]
-
-        # --- Validação do dicionário ---
-        conflitos = [] 
-        for professor_id in aulas_alocadas_por_professor.keys():
-            aulas = aulas_alocadas_por_professor[professor_id]
-            for aula in aulas:
-                if aulas.count(aula) > 1:
-                    conflitos.append({'professor_id': professor_id, 'dia_semana': aula[0], 'horario': aula[1]})
-
-        return conflitos
-
     disciplinas = Disciplina.objects.all()
     professores = Professor.objects.all()
 
@@ -499,49 +467,35 @@ def gerar_cronograma_view(request):
             'dias_semana': list(range(2,2+QTD_DIAS_SEMANA)),  # Dias da semana de segunda a sexta.
             'turmas': list(range(1,1+QTD_TURMAS)),  # Números de turmas de 1 a 3.
             'horarios': list(range(1,1+QTD_HORARIOS)),  # Números de horários de 1 a 4.
-            'professor_sobreposto': False,
         })
+
     elif request.method == 'POST':
         cronograma = Cronograma.objects.create() # Cria um objeto Cronograma vazio
 
-        # --- Validação ---
-        cronograma_validado = valida_cronograma()
+        for dia_semana in range(2, 2+QTD_DIAS_SEMANA):
+            for turma in range(1, 1+QTD_TURMAS):
+                for horario in range(1, 1+QTD_HORARIOS):
+                    disciplina_id = request.POST.get(f'disciplina_{dia_semana}_{turma}_{horario}')
+                    professor_id = request.POST.get(f'professor_{dia_semana}_{turma}_{horario}')
 
-        if cronograma_validado != None:
-            # Se não houver conflitos, cadastra o cronograma e redireciona para a página de cronograma gerado
-            for dia_semana in range(2, 2+QTD_DIAS_SEMANA):
-                for turma in range(1, 1+QTD_TURMAS):
-                    for horario in range(1, 1+QTD_HORARIOS):
-                        disciplina_key = f"disciplina_{dia_semana}_{turma}_{horario}"
-                        professor_key = f"professor_{dia_semana}_{turma}_{horario}"
-                        disciplina_id = request.POST.get(disciplina_key)
-                        professor_id = request.POST.get(professor_key)
-
+                    # Verifica se os campos não estão vazios
+                    if disciplina_id and professor_id:
+                        # Obtém os objetos Disciplina e Professor com base nos IDs
                         disciplina = Disciplina.objects.get(id=disciplina_id)
                         professor = Professor.objects.get(id=professor_id)
 
                         # Cria a instância da aula no banco de dados
-                        Aula.objects.create(
-                            cronograma = cronograma,
-                            turma = turma,
-                            disciplina = disciplina,
-                            professor = professor,
-                            dia_semana = dia_semana,
-                            horario = horario
+                        # Aqui está o erro, a linha abaixo tenta salvar um objeto Turma em vez de um número
+                        AAula.objects.create(
+                            cronograma=cronograma,
+                            disciplina=disciplina,
+                            professor=professor,
+                            dia_semana=dia_semana,
+                            turma=turma,  # Aqui usamos o valor do loop como o número da turma
+                            horario=horario
                         )
-            return redirect('/cronograma/')
-        else:
-            # Se houver conflito(s), exibe na tela os conflitos encontrados
-            conflitos = cronograma_validado
 
-            return render(request, 'gerar_cronograma.html', {
-            'disciplinas': disciplinas,
-            'professores': professores,
-            'dias_semana': list(range(2,2+QTD_DIAS_SEMANA)),  # Dias da semana de segunda a sexta.
-            'turmas': list(range(1,1+QTD_TURMAS)),  # Números de turmas de 1 a 3.
-            'horarios': list(range(1,1+QTD_HORARIOS)),  # Números de horários de 1 a 4.
-            'professor_sobreposto': True,
-        })
+        return redirect('/cronograma/')
 
     else:
         return HttpResponseBadRequest()

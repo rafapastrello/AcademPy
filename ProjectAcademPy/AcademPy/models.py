@@ -29,8 +29,8 @@ class Turma(models.Model):
 
 class Aula(models.Model):
     cronograma = models.ForeignKey(Cronograma, on_delete=models.CASCADE)
-    turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
-    dia_semana = models.IntegerField(choices=[(1, 'Segunda-Feira'), (2, 'Terça-Feira'), (3, 'Quarta-Feira'), (4, 'Quinta-Feira'), (5, 'Sexta-Feira')])
+    dia_semana = models.IntegerField()
+    turma = models.IntegerField()
     horario = models.IntegerField()

@@ -29,7 +29,7 @@ class DisciplinaAdmin(admin.ModelAdmin):
         None
     """
 
-    pass
+    list_display = ['nome']
 
 @admin.register(Professor)
 class ProfessorAdmin(admin.ModelAdmin):
@@ -42,7 +42,6 @@ class ProfessorAdmin(admin.ModelAdmin):
     Methods:
         None
     """
-
     pass
 
 @admin.register(Turma)

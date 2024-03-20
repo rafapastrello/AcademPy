@@ -14,10 +14,6 @@
 {% block conteudo %}
     <h1 class="text-white mb-5">Gerar Cronograma Acadêmico</h1>
 
-    {% if professor_sobreposto %}
-        <p class="text-danger">Professor(a) {{nome_professor_sobreposto}} em mais de uma turma no mesmo horário!</p>
-    {% endif %}
-
     <!-- Formulário para gerar Cronograma -->
     <form method="POST">
     {% csrf_token %}
@@ -44,18 +40,16 @@
                                     {% for horario in horarios  %}
                                         <td>
                                             <select class="form-select bg-dark text-primary p-1 m-0 mb-1" name="disciplina_{{dia_semana}}_{{turma}}_{{horario}}">
-                                                <option selected class="small" value="-1">Vazio</option>
                                                 {% for disciplina in disciplinas %}
                                                     <option class="small" value="{{disciplina.id}}">{{disciplina.nome}}</option>
                                                 {% endfor %}
                                             </select>
                                             
                                             <select class="form-select bg-dark text-white-50 small p-1 m-0" name="professor_{{dia_semana}}_{{turma}}_{{horario}}">
-                                                <option selected class="small" value="-1">Vazio</option>
                                                 {% for professor in professores %}
                                                     <option class="small" value="{{professor.id}}">{{professor.usuario.first_name}} {{professor.usuario.last_name}} - {{professor.especializacao}}</option>
                                                 {% endfor %}
-                                            </select>
+                                            </select>                                            
                                         </td>
                                     {% endfor %}
                                 </tr>
@@ -66,7 +60,7 @@
             </div>
         {% endfor %}
 
-        <button type="submit" class="btn btn-primary btn-block my-5">Verificar cronogramas</button>
+        <button type="submit" class="btn btn-primary btn-block my-5">Gerar cronogramas</button>
     </form>
 
 {% endblock conteudo %}
