@@ -1,8 +1,89 @@
 # Documentação
 
-Aqui, você deve elaborar um "guia" para desenvolvedores que queiram contribuir livremente com seu projeto. Estruture este documento como achar melhor. Embora já hajam algumas seções pré-definidas, elas são apenas sugestões de qual estrutura seguir e o que escrever.
+# Documentação para Desenvolvedores - Projeto Django
 
-**Não seja prolixo. Escreva de forma rápida, objetiva e sem informações óbvias.**
+## Introdução
+
+Bem-vindo à documentação para desenvolvedores do nosso projeto Django! Esta documentação oferece uma visão geral da estrutura do projeto, detalhes sobre os modelos de dados, as views e as principais funcionalidades implementadas.
+
+## Estrutura do Projeto
+
+O projeto Django segue a estrutura padrão, com os seguintes diretórios principais:
+
+- *projeto_django/*: Diretório raiz do projeto.
+  - *app/*: Aplicação principal do projeto.
+    - *migrations/*: Arquivos de migração do banco de dados.
+    - *static/*: Arquivos estáticos (CSS, JavaScript, etc.).
+    - *templates/*: Templates HTML.
+    - *views.py*: Arquivo contendo as views da aplicação.
+    - *models.py*: Arquivo contendo os modelos de dados.
+    - *urls.py*: Arquivo de configuração de URLs da aplicação.
+  - *projeto_django/*: Configurações do projeto Django.
+  - *media/*: Diretório para upload de arquivos de mídia.
+
+## Modelos de Dados
+
+### Administrador
+
+- Atributos:
+  - usuario: Um usuário do Django associado ao administrador.
+
+### Professor
+
+- Atributos:
+  - usuario: Um usuário do Django associado ao professor.
+  - especializacao: Especialização do professor.
+  - disponibilidade_manha, disponibilidade_tarde, disponibilidade_noite: Disponibilidade de horários do professor.
+
+### Disciplina
+
+- Atributos:
+  - nome: Nome da disciplina.
+
+### Cronograma
+
+- Atributos:
+  - dt_criacao: Data e hora de criação do cronograma.
+
+### Turma
+
+- Atributos:
+  - nome: Nome da turma.
+  - turno: Turno da turma (manhã, tarde, noite).
+
+### Aula
+
+- Atributos:
+  - cronograma: Cronograma ao qual a aula está associada.
+  - disciplina: Disciplina ministrada na aula.
+  - professor: Professor responsável pela aula.
+  - dia_semana: Dia da semana da aula (1 a 7, representando segunda a domingo).
+  - turma: Turma na qual a aula será ministrada.
+  - horario: Horário da aula.
+
+## Funcionalidades Implementadas
+
+- Cadastro de administradores e professores.
+- Cadastro, edição e exclusão de disciplinas e turmas.
+- Geração de cronogramas de aulas.
+- Visualização do cronograma de aulas por dia da semana e turma.
+- Autenticação de usuários e controle de acesso.
+
+## Próximos Passos
+
+- Implementar a funcionalidade de edição de cronogramas de aulas.
+- Melhorar a interface do usuário para uma experiência mais intuitiva.
+- Refatorar o código para seguir as melhores práticas de desenvolvimento.
+
+## Ambiente de Desenvolvimento
+
+Para configurar um ambiente de desenvolvimento local, siga as instruções fornecidas no arquivo README.md do projeto.
+
+## Suporte
+
+Para obter assistência adicional ou relatar problemas técnicos, entre em contato com a equipe de desenvolvimento em [email de suporte].
+
+---
 
 ## Instruções de deploy
 

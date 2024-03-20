@@ -7,12 +7,6 @@ from .models import Administrador, Disciplina, Professor, Turma, Cronograma, Aul
 class AdministradorAdmin(admin.ModelAdmin):
     """
     Esta classe é usada para personalizar a exibição e o comportamento do modelo Administrador no painel de administração do Django.
-
-    Attributes:
-        pass
-
-    Methods:
-        None
     """
 
     pass
@@ -21,12 +15,6 @@ class AdministradorAdmin(admin.ModelAdmin):
 class DisciplinaAdmin(admin.ModelAdmin):
     """
     Esta classe é usada para personalizar a exibição e o comportamento do modelo Disciplina no painel de administração do Django.
-
-    Attributes:
-        pass
-
-    Methods:
-        None
     """
 
     list_display = ['nome']
@@ -35,12 +23,6 @@ class DisciplinaAdmin(admin.ModelAdmin):
 class ProfessorAdmin(admin.ModelAdmin):
     """
     Esta classe é usada para personalizar a exibição e o comportamento do modelo Professor no painel de administração do Django.
-
-    Attributes:
-        pass
-
-    Methods:
-        None
     """
     pass
 
@@ -48,12 +30,6 @@ class ProfessorAdmin(admin.ModelAdmin):
 class TurmaAdmin(admin.ModelAdmin):
     """
     Esta classe é usada para personalizar a exibição e o comportamento do modelo Turma no painel de administração do Django.
-
-    Attributes:
-        list_display (list): Lista dos campos a serem exibidos na lista de turmas.
-
-    Methods:
-        None
     """
 
     list_display = ['nome', 'turno']

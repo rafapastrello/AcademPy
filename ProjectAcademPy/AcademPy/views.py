@@ -15,7 +15,7 @@ def cadastro_adm_view(request):
     Returns:
         HttpResponse: Renderiza a página de cadastro de administrador com formulário vazio no método GET.
         Redireciona para a página de conta do usuário após o cadastro bem-sucedido no método POST.
-        Retorna uma resposta de erro BadRequest para outros métodos de requisição.
+        Retorna uma resposta de erro BadzRequest para outros métodos de requisição.
 
     """
     if request.method == 'GET':
@@ -486,7 +486,7 @@ def gerar_cronograma_view(request):
 
                         # Cria a instância da aula no banco de dados
                         # Aqui está o erro, a linha abaixo tenta salvar um objeto Turma em vez de um número
-                        AAula.objects.create(
+                        Aula.objects.create(
                             cronograma=cronograma,
                             disciplina=disciplina,
                             professor=professor,
