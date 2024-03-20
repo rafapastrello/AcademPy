@@ -1,17 +1,13 @@
-# Documentação
-
 # Documentação para Desenvolvedores - Projeto Django
 
-## Introdução
-
-Bem-vindo à documentação para desenvolvedores do nosso projeto Django! Esta documentação oferece uma visão geral da estrutura do projeto, detalhes sobre os modelos de dados, as views e as principais funcionalidades implementadas.
+<br/>
 
 ## Estrutura do Projeto
 
 O projeto Django segue a estrutura padrão, com os seguintes diretórios principais:
 
-- *projeto_django/*: Diretório raiz do projeto.
-  - *app/*: Aplicação principal do projeto.
+- *ProjectAcademPy/*: Diretório raiz do projeto.
+  - *AcademPy/*: Aplicação principal do projeto.
     - *migrations/*: Arquivos de migração do banco de dados.
     - *static/*: Arquivos estáticos (CSS, JavaScript, etc.).
     - *templates/*: Templates HTML.
@@ -19,7 +15,6 @@ O projeto Django segue a estrutura padrão, com os seguintes diretórios princip
     - *models.py*: Arquivo contendo os modelos de dados.
     - *urls.py*: Arquivo de configuração de URLs da aplicação.
   - *projeto_django/*: Configurações do projeto Django.
-  - *media/*: Diretório para upload de arquivos de mídia.
 
 ## Modelos de Dados
 
@@ -81,7 +76,9 @@ Para configurar um ambiente de desenvolvimento local, siga as instruções forne
 
 ## Suporte
 
-Para obter assistência adicional ou relatar problemas técnicos, entre em contato com a equipe de desenvolvimento em [email de suporte].
+Para obter assistência adicional ou relatar problemas técnicos, entre em contato com a autora raf.llosilva@gmail.com
+
+<br/><br/><br/><br/>
 
 ---
 
