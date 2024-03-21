@@ -438,8 +438,15 @@ def excluir_turma_view(request, id):
     return HttpResponseRedirect('/turmas')
 
 
+def exemplo_cronograma_view(request):
+    """
+    Renderiza a página de exemplo de cronograma.
+    """
+    return render(request, 'exemplo_cronograma.html')
+
+
 # Definir constantes para o número de dias da semana, turmas e horários
-QTD_DIAS_SEMANA = 1
+QTD_DIAS_SEMANA = 5
 QTD_TURMAS = 3
 QTD_HORARIOS = 4
 
