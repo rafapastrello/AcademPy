@@ -4,6 +4,8 @@ from django.http import HttpResponseRedirect, HttpResponseBadRequest, HttpRespon
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Administrador, Professor, Turma, Disciplina, Aula, Cronograma
+from django.urls import reverse
+from django.db import transaction
 
 def cadastro_adm_view(request):
     """
@@ -173,28 +175,14 @@ def cronograma_view(request):
     disciplinas = Disciplina.objects.all()
     professores = Professor.objects.all()
 
-    def obter_aulas(cronograma, turma, dia_semana):
-        return Aula.objects.filter(cronograma=cronograma).filter(turma=turma).filter(dia_semana=dia_semana).order_by('horario')
-
-    cronograma = Cronograma.objects.order_by('-dt_criacao').first()
-
-    dias_da_semana = [
-        (
-            dia_semana, 
-            [(turma.nome, obter_aulas(cronograma, turma, dia_semana)) for turma in Turma.objects.all()]
-        ) 
-        for dia_semana in range(1,8)
-    ]
-
     return render(request, 'cronograma.html', {
-        'dias_da_semana': dias_da_semana,
         'disciplinas': disciplinas,
         'professores': professores,
-        'dias_semana': list(range(2,2+QTD_DIAS_SEMANA)),  # Dias da semana de segunda a sexta.
-        'turmas': list(range(1,1+QTD_TURMAS)),  # Números de turmas de 1 a 3.
-        'horarios': list(range(1,1+QTD_HORARIOS)),  # Números de horários de 1 a 4.
-        'professor_sobreposto': False,
+        'dias_semana': list(range(2, 2 + QTD_DIAS_SEMANA)),
+        'turmas': list(range(1, 1 + QTD_TURMAS)),
+        'horarios': list(range(1, 1 + QTD_HORARIOS)),
     })
+
 
 @login_required(login_url='/entrar')
 def disciplinas_view(request):
@@ -455,48 +443,56 @@ QTD_DIAS_SEMANA = 1
 QTD_TURMAS = 3
 QTD_HORARIOS = 4
 
+
 @login_required(login_url='/entrar')
 def gerar_cronograma_view(request):
+    # Obtendo todas as disciplinas e professores do banco de dados
     disciplinas = Disciplina.objects.all()
     professores = Professor.objects.all()
 
+    # Verifica se a requisição é GET, para renderizar a página com os dados necessários
     if request.method == 'GET':
         return render(request, 'gerar_cronograma.html', {
             'disciplinas': disciplinas,
             'professores': professores,
-            'dias_semana': list(range(2,2+QTD_DIAS_SEMANA)),  # Dias da semana de segunda a sexta.
-            'turmas': list(range(1,1+QTD_TURMAS)),  # Números de turmas de 1 a 3.
-            'horarios': list(range(1,1+QTD_HORARIOS)),  # Números de horários de 1 a 4.
+            'dias_semana': list(range(2, 2 + QTD_DIAS_SEMANA)),
+            'turmas': list(range(1, 1 + QTD_TURMAS)),
+            'horarios': list(range(1, 1 + QTD_HORARIOS)),
         })
 
+    # Se a requisição é POST, é feita a criação do cronograma
     elif request.method == 'POST':
-        cronograma = Cronograma.objects.create() # Cria um objeto Cronograma vazio
+        # Garante que todas as operações no banco de dados dentro deste bloco ocorram em uma transação
+        with transaction.atomic():
+            # Cria um novo cronograma no banco de dados
+            cronograma = Cronograma.objects.create()
 
-        for dia_semana in range(2, 2+QTD_DIAS_SEMANA):
-            for turma in range(1, 1+QTD_TURMAS):
-                for horario in range(1, 1+QTD_HORARIOS):
-                    disciplina_id = request.POST.get(f'disciplina_{dia_semana}_{turma}_{horario}')
-                    professor_id = request.POST.get(f'professor_{dia_semana}_{turma}_{horario}')
+            # Itera sobre todas as combinações de dia da semana, turma e horário
+            for dia_semana in range(2, 2 + QTD_DIAS_SEMANA):
+                for turma in range(1, 1 + QTD_TURMAS):
+                    for horario in range(1, 1 + QTD_HORARIOS):
+                        # Obtém o ID da disciplina e do professor para esta combinação
+                        disciplina_id = request.POST.get(f"disciplina_{dia_semana}_{turma}_{horario}")
+                        professor_id = request.POST.get(f"professor_{dia_semana}_{turma}_{horario}")
 
-                    # Verifica se os campos não estão vazios
-                    if disciplina_id and professor_id:
-                        # Obtém os objetos Disciplina e Professor com base nos IDs
-                        disciplina = Disciplina.objects.get(id=disciplina_id)
-                        professor = Professor.objects.get(id=professor_id)
+                        # Se tanto o ID da disciplina quanto o ID do professor forem fornecidos no POST
+                        if disciplina_id and professor_id:
+                            # Cria uma nova aula associada ao cronograma atual
+                            aula = Aula(
+                                cronograma=cronograma,
+                                disciplina_id=disciplina_id,
+                                professor_id=professor_id,
+                                dia_semana=dia_semana,
+                                turma=turma,
+                                horario=horario
+                            )
+                            # Salva a aula no banco de dados
+                            aula.save()
 
-                        # Cria a instância da aula no banco de dados
-                        # Aqui está o erro, a linha abaixo tenta salvar um objeto Turma em vez de um número
-                        Aula.objects.create(
-                            cronograma=cronograma,
-                            disciplina=disciplina,
-                            professor=professor,
-                            dia_semana=dia_semana,
-                            turma=turma,  # Aqui usamos o valor do loop como o número da turma
-                            horario=horario
-                        )
+        # Após a conclusão bem-sucedida da criação do cronograma e das aulas, redireciona para a visualização do cronograma
+        return HttpResponseRedirect(reverse('cronograma_view'))
 
-        return redirect('/cronograma/')
-
+    # Se a requisição não é nem GET nem POST, retorna um erro de solicitação inválida
     else:
         return HttpResponseBadRequest()
 

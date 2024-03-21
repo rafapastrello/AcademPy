@@ -16,78 +16,60 @@
 
 {% block conteudo %}
     <!-- Conteúdo -->
-    <h1 class="text-white mt-4">Bem-vindo ao Nosso Sistema de Gestão Acadêmica!</h1>
-
-    <h3 class="text-primary mt-5">Sobre o Sistema</h3>
-    <p class="text-white-50 mb-4">
-        Nosso sistema de gestão acadêmica é uma solução abrangente projetada para facilitar a administração de instituições de ensino, desde o cadastro de professores até a criação de cronogramas de aulas. Com uma interface intuitiva e poderosas funcionalidades, nosso sistema ajuda a otimizar os processos acadêmicos, economizando tempo e recursos.
-    </p>
-    {% endblock conteudo %}
-    
-    {% block extra %}
-    <section class="bg-dark py-1 pb-5">
-        <div class="col-9">
-            <h3 class="text-primary mt-5">Principais Funcionalidades</h3>
-
-            <p class="text-white mx-4 mt-3 mb-0">Cadastro de Administradores e Professores</p>
-            <p class="text-white-50 mx-4 mt-0">
-                Cadastre facilmente administradores e professores, atribuindo permissões e especializações conforme necessário.
-            </p>
-            
-            <p class="text-white mx-4 mt-4 mb-0">Gerenciamento de Disciplinas e Turmas</p>
-            <p class="text-white-50 mx-4 mt-0">
-                Crie e gerencie disciplinas e turmas de forma eficiente, garantindo uma organização adequada do currículo escolar.
-            </p>
-            
-            <p class="text-white mx-4 mt-3 mb-0">Geração de Cronogramas de Aulas</p>
-            <p class="text-white-50 mx-4 mt-0">
-                Utilize nossa ferramenta para gerar cronogramas de aulas personalizados, levando em consideração a disponibilidade de professores e a distribuição equitativa das disciplinas.
-            </p>
-            
-            <p class="text-white mx-4 mt-3 mb-0">Visualização do Cronograma</p>
-            <p class="text-white-50 mx-4 mt-0">
-                Visualize de forma clara e organizada o cronograma de aulas por dia da semana e turma, facilitando o planejamento e acompanhamento das atividades acadêmicas.
-            </p>
-            
-            <p class="text-white mx-4 mt-3 mb-0">Controle de Acesso</p>
-            <p class="text-white-50 mx-4 mt-0">
-                Garanta a segurança dos dados e o controle de acesso ao sistema, atribuindo permissões específicas a administradores e professores.
-            </p>
-        </div>
-
+    <div class="container text-center mt-5">
+        <h1 class="display-3 text-white">Bem-vindo ao AcademPy!</h1>
+        <p class="lead text-white-50">Solução completa para gestão acadêmica.</p>
         
-        <div class="col-9">
-            <h3 class="text-primary mt-5">Por que Escolher Nosso Sistema?</h3>
-
-            <p class="text-white mx-4 mt-3 mb-0">Facilidade de Uso</p>
-            <p class="text-white-50 mx-4 mt-0">
-                Interface intuitiva e amigável, permitindo uma rápida adaptação por parte dos usuários.
-            </p>
-            
-            <p class="text-white mx-4 mt-4 mb-0">Eficiência e Produtividade</p>
-            <p class="text-white-50 mx-4 mt-0">
-                Automatize processos e simplifique tarefas administrativas, aumentando a eficiência e produtividade da sua instituição de ensino.
-            </p>
-            
-            <p class="text-white mx-4 mt-3 mb-0">Suporte Técnico</p>
-            <p class="text-white-50 mx-4 mt-0">
-                Equipe de suporte técnico dedicada a fornecer assistência e resolver quaisquer problemas que possam surgir durante o uso do sistema.
-            </p>
-            
-            <p class="text-white mx-4 mt-3 mb-0">Customização e Escalabilidade</p>
-            <p class="text-white-50 mx-4 mt-0">
-                Sistema altamente customizável e escalável, capaz de atender às necessidades específicas de diferentes tipos e tamanhos de instituições de ensino.
-            </p>
+        <div class="row justify-content-center mt-5 mb-4">
+            <div class="col-md-10">
+                <h3 class="text-primary mt-5">Por que Escolher o AcademPy?</h3>
+                <p class="text-secondary">Simples, intuitivo e eficiente. Gerencie sua instituição de ensino de forma inteligente e organizada.</p>
+            </div>
         </div>
 
-        <div class="col-9">
-            <h3 class="text-primary mt-5">Experimente Agora!</h3>
-            <p class="text-white mx-4 mt-3 mb-0">
-                Não perca mais tempo com processos manuais e desorganizados. Experimente nosso sistema de gestão acadêmica hoje mesmo e descubra como podemos transformar a sua instituição de ensino. Entre em contato conosco para obter mais informações ou agendar uma demonstração.
-            </p>
+    </div>
+{% endblock conteudo %}
+
+{% block extra %}
+<section class="bg-dark py-1 pb-5">
+    <div class="container">
+        <div class="row justify-content-center my-5">
+            <div class="col-md-6">
+                <h3 class="text-primary mt-4 mb-4"><img src="{% static "img/icones/seta_preta.png" %}" width="20" class="mr-2">
+                    Principais Funcionalidades
+                </h3>
+                <ul class="list-unstyled text-white-50">
+                    <li class="mt-3"><strong class="text-white">Cadastro Simplificado:</strong> Adicione administradores e professores com apenas alguns cliques.</li>
+                    <li class="mt-3"><strong class="text-white">Gestão de Disciplinas:</strong> Organize o currículo escolar de forma eficiente e flexível.</li>
+                    <li class="mt-3"><strong class="text-white">Criação de Cronogramas Personalizados:</strong> Planeje aulas de acordo com a disponibilidade de professores e alunos.</li>
+                    <li class="mt-3"><strong class="text-white">Controle de Acesso Avançado:</strong> Defina permissões precisas para garantir a segurança dos dados.</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h3 class="text-primary mt-4 mb-4"><img src="{% static "img/icones/seta_preta.png" %}" width="20" class="mr-2">
+                    Benefícios do Nosso Sistema
+                </h3>
+                <ul class="list-unstyled text-white-50">
+                    <li class="mt-3"><strong class="text-white">Interface Intuitiva:</strong> Fácil de usar, sem curva de aprendizado.</li>
+                    <li class="mt-3"><strong class="text-white">Otimização de Tarefas:</strong> Automatize processos para economizar tempo e recursos.</li>
+                    <li class="mt-3"><strong class="text-white">Suporte Personalizado:</strong> Equipe dedicada pronta para ajudar a qualquer momento.</li>
+                    <li class="mt-3"><strong class="text-white">Flexibilidade e Escalabilidade:</strong> Adapte o sistema às necessidades específicas da sua instituição.</li>
+                </ul>
+            </div>
         </div>
 
-    </section>
+        <div class="row justify-content-center align-items-center my-5">
+            <div class="col-md-9 text-center">
+                <h3 class="text-primary mt-5">Experimente Agora!</h3>
+                <p class="text-white-50 mx-4 mt-3 mb-0">
+                    Não perca mais tempo com processos manuais e desorganizados. Entre em contato para obter mais informações ou agendar uma demonstração.
+                </p>
+            </div>
+        </div>        
+    </div>
+</section>
 
-    <a href="#topo" class="col-3 btn btn-primary btn-block mt-5">Voltar ao topo</a>
+<div class="text-center my-5">
+    <a href="#topo" class="col-4 btn btn-primary btn-block">Voltar ao topo</a>
+</div>
 {% endblock extra %}

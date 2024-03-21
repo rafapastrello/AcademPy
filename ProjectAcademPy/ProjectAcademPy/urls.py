@@ -28,18 +28,18 @@ urlpatterns = [
     path('cadastro-adm/', views.cadastro_adm_view),  # Rota para o formulário de cadastro de administradores
     path('cadastro-professor/', views.cadastro_professor_view),  # Rota para o formulário de cadastro de professores
     path('criar-cronograma/', views.criar_cronograma_view),  # Rota para o formulário de criação de cronogramas
-    path('cronograma/', views.cronograma_view),  # Rota para visualizar o cronograma
     path('disciplinas/', views.disciplinas_view),  # Rota para visualizar as disciplinas
     path('editar-disciplina/<int:id>', views.editar_disciplina_view, name='editar-disciplina'),  # Rota para editar uma disciplina específica
     path('editar-turma/<int:id>', views.editar_turma_view, name='editar-turma'),  # Rota para editar uma turma específica
     path('entrar/', views.entrar_view),  # Rota para a página de login
     path('excluir-disciplina/<int:id>', views.excluir_disciplina_view, name='excluir-disciplina'),  # Rota para excluir uma disciplina específica
     path('excluir-turma/<int:id>', views.excluir_turma_view, name='excluir-turma'),  # Rota para excluir uma turma específica
-    path('gerar-cronograma/', views.gerar_cronograma_view),  # Rota para gerar cronogramas
     path('home/', views.home_view),  # Rota para a página principal
     path('logout/', views.logout_view),  # Rota para fazer logout
     path('minha-conta/', views.minha_conta_view),  # Rota para visualizar e editar a conta do usuário
     path('professores/', views.professores_view),  # Rota para visualizar os professores
     path('redes-sociais/', views.redes_sociais_view),  # Rota para visualizar as redes sociais
     path('turmas/', views.turmas_view),  # Rota para visualizar as turmas
+    path('cronograma/', views.cronograma_view, name='cronograma_view'),  # Rota para visualizar o cronograma
+    path('gerar-cronograma/', views.gerar_cronograma_view, name='gerar_cronograma'),  # Rota para gerar cronogramas
 ]
