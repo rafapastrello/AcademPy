@@ -56,13 +56,13 @@ def cadastro_adm_view(request):
         user.first_name = nome.split(' ')[0]
         user.last_name = nome.split(' ')[-1]
         user.save()
-        
+
         # Cria o objeto Administrador associado ao usuário.
         administrador = Administrador()
         administrador.usuario = user
         administrador.cod_academ = cod_academ
         administrador.save()
-        
+
         # Faz login do usuário recém-criado e redireciona para a página de conta.
         login(request, user)
         return HttpResponseRedirect('/minha-conta')
@@ -481,14 +481,16 @@ def gerar_cronograma_view(request):
                         # Obtém o ID da disciplina e do professor para esta combinação
                         disciplina_id = request.POST.get(f"disciplina_{dia_semana}_{turma}_{horario}")
                         professor_id = request.POST.get(f"professor_{dia_semana}_{turma}_{horario}")
+                        disciplinas = disciplinas
+                        professores = professores
 
                         # Se tanto o ID da disciplina quanto o ID do professor forem fornecidos no POST
                         if disciplina_id and professor_id:
                             # Cria uma nova aula associada ao cronograma atual
                             aula = Aula(
                                 cronograma=cronograma,
-                                disciplina_id=disciplina_id,
-                                professor_id=professor_id,
+                                disciplinas=disciplinas,
+                                professores=professores,
                                 dia_semana=dia_semana,
                                 turma=turma,
                                 horario=horario
