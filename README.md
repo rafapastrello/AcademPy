@@ -27,3 +27,16 @@ AcademPy é um sistema de gerenciamento acadêmico desenvolvido com Django e est
 |  |  |
 |:-------------:|:------------------------------------------------------------:|
 |  <img src="img/profilepic.jpeg" width="150px"></br> **Rafaela Pastrello** | Sou a Rafa Pastrello, tenho 15 anos, e desde os 14 descobri a alegria de ver "Hello World!" aparecendo na tela. Meu interesse em linguagens como HTML, CSS, PHP, Python me levou a buscar conhecimento em cursos online e a participar de comunidades de programadores. Ao longo do último ano, tenho dedicado meu tempo livre ao aprimoramento das minhas habilidades, criando pequenos projetos pessoais. Meu objetivo é me tornar uma desenvolvedora web profissional e contribuir para a criação de soluções inovadoras na internet. |
+
+<!-- Redes sociais -->
+<div align="center"> 
+  <a href="https://discord.com/users/1065050312420900934/"><img src="https://cdn-icons-png.flaticon.com/128/2626/2626288.png" height="40" alt="Discord"/></a>
+  <img width="20" />
+  <a href="mailto:raf.llosilva@gmail.com"><img src="https://cdn-icons-png.flaticon.com/128/2504/2504727.png" height="37" alt="Gmail"/></a>
+  <img width="20" />
+  <a href="https://www.linkedin.com/in/rafaela-pastrello-silva-049801283/"><img src="https://cdn-icons-png.flaticon.com/128/3938/3938061.png" height="34" alt="LinkedIn"/></a>
+  <img width="20" />
+  <a href="https://www.instagram.com/rafa.pastrello/"><img src="https://cdn-icons-png.flaticon.com/128/3938/3938051.png" height="34" alt="Instagram"/></a>
+  <img width="20" />
+  <a href="https://www.facebook.com/raf.llosilva/"><img src="https://cdn-icons-png.flaticon.com/128/1409/1409943.png" height="34" alt="Facebook"/></a>
+</div>
