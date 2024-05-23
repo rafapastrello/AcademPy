@@ -57,6 +57,6 @@ Para acessar o sistema, vá para a página de login em '/entrar'. Se você não 
 
 ## Suporte
 
-Para obter assistência adicional ou relatar problemas técnicos, entre em contato com a autora raf.llosilva@gmail.com
+Para obter assistência adicional ou relatar problemas técnicos, entre em contato com a autora rafapastrello@gmail.com
 
 ---
