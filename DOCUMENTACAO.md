@@ -76,7 +76,7 @@ Para configurar um ambiente de desenvolvimento local, siga as instruções forne
 
 ## Suporte
 
-Para obter assistência adicional ou relatar problemas técnicos, entre em contato com a autora raf.llosilva@gmail.com
+Para obter assistência adicional ou relatar problemas técnicos, entre em contato com a autora rafapastrello@gmail.com
 
 <br/><br/><br/><br/>
 
